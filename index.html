@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NUVI ofrece soluciones civiles y electromecánicas para la continuidad operativa, el mantenimiento técnico y la gestión integral de instalaciones.">
+  <title>NUVI | Soluciones civiles y electromecánicas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { 'nuvi-white': '#FAFAF7', 'nuvi-cream': '#EFECE5', 'nuvi-beige': '#DCD4C9', 'nuvi-light': '#9E7E61', 'nuvi-dark': '#2A2118' }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="antialiased selection:bg-nuvi-light selection:text-white">
+  <header class="fixed w-full top-0 z-50 nav-glass transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-28 md:h-36">
+        <div class="flex-shrink-0 flex items-center cursor-pointer gs-nav-item">
+          <img src="assets/images/logo-nuvi.jpeg" alt="NUVI Logo" class="h-20 md:h-28 w-auto mix-blend-multiply">
+        </div>
+        <nav class="hidden md:flex space-x-8 gs-nav-item">
+          <a href="#" class="text-sm font-medium hover:text-nuvi-light transition-colors">Inicio</a>
+          <a href="#" class="text-sm font-medium hover:text-nuvi-light transition-colors">Nosotros</a>
+          <a href="#" class="text-sm font-medium hover:text-nuvi-light transition-colors">Servicios</a>
+          <a href="#" class="text-sm font-medium hover:text-nuvi-light transition-colors">Proyectos</a>
+        </nav>
+        <div class="hidden md:flex gs-nav-item"><a href="#" class="bg-nuvi-dark text-nuvi-white px-6 py-3 text-sm font-medium hover:bg-nuvi-light transition-all duration-300 shadow-lg shadow-nuvi-dark/10">Contactar</a></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="relative min-h-screen pt-40 pb-20 lg:pt-56 lg:pb-28 flex items-center overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <div class="lg:col-span-5 flex flex-col justify-center relative z-10">
+            <div class="clip-text mb-4"><span class="gs-hero-text inline-block text-xs md:text-sm font-semibold tracking-[0.2em] text-nuvi-light uppercase">Ingeniería & Precisión</span></div>
+            <div class="clip-text mb-6"><h1 class="gs-hero-text font-serif text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] text-nuvi-dark">Estructuras<br><span class="italic font-light text-nuvi-light">Sólidas,</span><br>Sistemas Exactos.</h1></div>
+            <div class="clip-text mb-10"><p class="gs-hero-text text-base md:text-lg text-nuvi-dark/80 font-sans font-light leading-relaxed max-w-md">Diseñamos, implementamos y mantenemos sistemas electromecánicos de alto rendimiento corporativo.</p></div>
+          </div>
+          <div class="lg:col-span-7 relative w-full h-[50vh] lg:h-[75vh] mt-8 lg:mt-0 flex items-center justify-center gs-hero-visual">
+            <div class="absolute inset-0 bg-nuvi-cream rounded-sm transform rotate-2 scale-95 opacity-50 transition-transform duration-700 gs-shape"></div>
+            <div class="relative w-full h-full grid grid-cols-12 grid-rows-6 gap-4 p-4 lg:p-0">
+              <div class="col-span-12 row-span-4 lg:col-span-8 lg:row-span-6 lg:col-start-1 lg:row-start-1 video-placeholder noise-overlay z-20 shadow-2xl flex items-center justify-center group overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop" alt="Sistema NUVI" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply group-hover:scale-105 transition-transform duration-1000 ease-out">
+                <div class="absolute bottom-6 left-6 text-white text-xs tracking-widest uppercase font-semibold"><span class="w-2 h-2 inline-block bg-nuvi-light rounded-full mr-2 animate-pulse"></span> Sistema IA en curso</div>
+              </div>
+              <div class="hidden lg:flex col-span-4 row-span-3 col-start-9 row-start-4 bg-nuvi-dark text-nuvi-white flex-col justify-end p-6 relative overflow-hidden shadow-lg gs-img-small">
+                <span class="text-3xl font-serif mb-1">+25</span><span class="text-xs uppercase tracking-wider text-nuvi-white/70">Años de excelencia<br>en ingeniería</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Franja de Confianza -->
+    <section class="border-y border-nuvi-beige bg-nuvi-cream py-10 relative z-20">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-nuvi-beige">
+        <div><span class="block font-serif text-4xl text-nuvi-dark mb-1">+48</span><span class="text-xs text-nuvi-dark/70 uppercase tracking-widest">Proyectos Ejecutados</span></div>
+        <div><span class="block font-serif text-4xl text-nuvi-dark mb-1">+120</span><span class="text-xs text-nuvi-dark/70 uppercase tracking-widest">Sistemas Intervenidos</span></div>
+        <div><span class="block font-serif text-4xl text-nuvi-dark mb-1">100%</span><span class="text-xs text-nuvi-dark/70 uppercase tracking-widest">Cumplimiento Normativo</span></div>
+        <div><span class="block font-serif text-4xl text-nuvi-dark mb-1">24/7</span><span class="text-xs text-nuvi-dark/70 uppercase tracking-widest">Soporte Operativo</span></div>
+      </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section class="py-20 lg:py-32 bg-nuvi-white" id="nosotros">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="relative h-[400px] lg:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356f58?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Equipo NUVI">
+          <div class="absolute inset-0 bg-nuvi-dark/20"></div>
+        </div>
+        <div>
+          <span class="block text-sm font-semibold tracking-[0.2em] text-nuvi-light uppercase mb-4">SOBRE NUVI</span>
+          <h2 class="font-serif text-4xl md:text-5xl font-semibold text-nuvi-dark mb-6">Ingeniería que respalda su operación diaria.</h2>
+          <p class="text-nuvi-dark/80 font-light leading-relaxed mb-6">Somos una empresa orientada al mantenimiento civil y electromecánico con enfoque integral. Atendemos las necesidades de infraestructura desde la evaluación inicial hasta la ejecución y el seguimiento, cuidando la operación y el rendimiento de los equipos.</p>
+          <p class="text-nuvi-dark/80 font-light leading-relaxed mb-8">Nuestro trabajo combina criterio técnico, coordinación operativa y una lectura clara de las prioridades del cliente para intervenir sin perder de vista continuidad, costos y control.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO DIGITAL DE SERVICIOS -->
+    <section class="py-20 lg:py-32 bg-nuvi-cream" id="services-section">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center mb-24"><span class="block text-sm font-semibold tracking-[0.2em] text-nuvi-light uppercase mb-3">CATÁLOGO DIGITAL</span><h2 class="font-serif text-4xl md:text-5xl font-semibold text-nuvi-dark">Nuestras Soluciones</h2></div>
+
+        <!-- Categoría 1: Electromecánico -->
+        <div class="mb-24 catalog-category relative border-t border-nuvi-beige pt-12">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div class="lg:col-span-4 lg:sticky lg:top-40">
+              <span class="text-nuvi-light font-serif text-8xl opacity-20 absolute -top-8 -left-4 -z-10">01</span>
+              <h3 class="font-serif text-3xl md:text-4xl font-semibold text-nuvi-dark mb-4 relative z-10">Mantenimiento Electromecánico</h3>
+              <p class="text-nuvi-dark/80 font-light leading-relaxed">Nuestra área principal de mayor especialización técnica, abarcando desde la prevención hasta la corrección en equipos críticos de su infraestructura.</p>
+            </div>
+            <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Sistemas de Generación Eléctrica</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Mantenimiento preventivo y correctivo de plantas eléctricas de emergencia, transferencias automáticas (ATS) y sincronización.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Climatización y Refrigeración (HVAC)</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Instalación, diagnóstico y mantenimiento de aires acondicionados industriales y comerciales (Chillers, VRF, manejadoras, unidades paquete y divididas).</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Sistemas de Bombeo y Motores</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Reparación, rebobinado y mantenimiento de motores eléctricos, bombas de agua potable, bombas sumergibles y sistemas hidroneumáticos.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Sistemas Contra Incendios</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Mantenimiento riguroso a los cuartos de bombas contra incendio, red de rociadores, y sistemas de detección y alarma.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl md:col-span-2">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Infraestructura Eléctrica</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Diseño, instalación y mantenimiento de tableros eléctricos, distribución de media y baja tensión, corrección del factor de potencia (banco de capacitores) y sistemas de puesta a tierra.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría 2: Mantenimiento Civil -->
+        <div class="mb-24 catalog-category relative border-t border-nuvi-beige pt-12">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div class="lg:col-span-4 lg:sticky lg:top-40">
+              <span class="text-nuvi-light font-serif text-8xl opacity-20 absolute -top-8 -left-4 -z-10">02</span>
+              <h3 class="font-serif text-3xl md:text-4xl font-semibold text-nuvi-dark mb-4 relative z-10">Mantenimiento Civil</h3>
+              <p class="text-nuvi-dark/80 font-light leading-relaxed">Enfocados en la preservación de la infraestructura física, evitando el deterioro y manteniendo la estética y funcionalidad operativa.</p>
+            </div>
+            <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Impermeabilización</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Aplicación de sistemas avanzados de impermeabilización en techos, losas, cisternas y muros para prevenir filtraciones y humedad severa.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Instalaciones Hidrosanitarias</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Reparación y mantenimiento de redes de distribución de agua potable, drenajes pluviales, sistemas sanitarios y limpieza de trampas de grasa.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Pintura y Terminaciones</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Pintura industrial (epóxica para pisos de alto tráfico o naves), pintura comercial en interiores/exteriores y reparación de fisuras estructurales.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Estructuras y Remodelaciones</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Trabajos en plafones, divisiones en Sheetrock/Durock, instalación de pisos y mantenimiento especializado de herrería y soldadura.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría 3: Facility Management -->
+        <div class="catalog-category relative border-t border-nuvi-beige pt-12">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div class="lg:col-span-4 lg:sticky lg:top-40">
+              <span class="text-nuvi-light font-serif text-8xl opacity-20 absolute -top-8 -left-4 -z-10">03</span>
+              <h3 class="font-serif text-3xl md:text-4xl font-semibold text-nuvi-dark mb-4 relative z-10">Facility Management</h3>
+              <p class="text-nuvi-dark/80 font-light leading-relaxed">Asumimos el control del recinto asegurando su operación ininterrumpida, permitiendo que usted se enfoque al 100% en su negocio principal.</p>
+            </div>
+            <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Igualas de Mantenimiento Integral</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Contratos de servicio a largo plazo para la gestión total de su edificio, con visitas programadas y personal técnico especializado asignado.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Iluminación Integral</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Mantenimiento y actualización de iluminación interior, exterior, alumbrado de emergencia y sistemas avanzados de automatización de luces.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Seguridad y Control de Acceso</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Instalación y mantenimiento de circuitos cerrados (CCTV), controles de acceso biométricos o por tarjeta magnética, y puertas automáticas.</p>
+              </div>
+              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
+                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Auditorías y Eficiencia Energética</h4>
+                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Levantamientos de consumo, termografías a tableros eléctricos y propuestas de mejora directas para reducir el gasto energético en sus instalaciones.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-highlight" class="relative h-[90vh] lg:h-screen flex items-center justify-center parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1607027345933-40a35b81f34f?q=80&w=2070&auto=format&fit=crop');">
+      <div class="absolute inset-0 bg-nuvi-dark/60"></div>
+      <div class="relative max-w-7xl mx-auto px-6 lg:px-12 w-full flex justify-start">
+        <div class="gs-project-content bg-nuvi-white/95 backdrop-blur-sm p-8 md:p-12 max-w-xl shadow-2xl">
+          <span class="block text-sm font-semibold tracking-[0.2em] text-nuvi-light uppercase mb-4">Caso de Éxito</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-semibold text-nuvi-dark mb-4">Modernización Planta Industrial</h2>
+          <p class="text-nuvi-dark/80 font-light mb-8">Renovación HVAC y sistema de control centralizado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto CTA -->
+    <section class="bg-nuvi-white py-20 lg:py-32" id="contacto">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="font-serif text-4xl md:text-5xl font-semibold text-nuvi-dark mb-6">Si su operación necesita orden técnico, conversemos.</h2>
+        <p class="text-lg text-nuvi-dark/80 font-light mb-10 max-w-2xl mx-auto">Estructuramos evaluaciones iniciales, revisamos necesidades actuales o preparamos propuestas de mantenimiento integral alineadas a su operación.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#" class="bg-nuvi-dark text-nuvi-white px-8 py-4 text-sm font-medium hover:bg-nuvi-light transition-all shadow-xl shadow-nuvi-dark/20">Solicitar evaluación</a>
+          <a href="mailto:contacto@nuvisoluciones.com" class="border border-nuvi-dark/20 text-nuvi-dark px-8 py-4 text-sm font-medium hover:border-nuvi-dark hover:bg-nuvi-dark hover:text-nuvi-white transition-all">contacto@nuvisoluciones.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-nuvi-dark text-nuvi-white pt-20 pb-10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div class="lg:col-span-1">
+          <div class="bg-nuvi-white inline-block p-3 rounded-lg mb-6 shadow-lg">
+            <img src="assets/images/logo-nuvi.jpeg" alt="NUVI Logo" class="h-10 w-auto mix-blend-multiply">
+          </div>
+          <p class="text-nuvi-beige font-light text-sm leading-relaxed">Soluciones civiles y electromecánicas para infraestructura corporativa, comercial e industrial con enfoque en continuidad operativa.</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold tracking-wider text-nuvi-beige uppercase mb-6">Navegación</h3>
+          <ul class="space-y-3 text-sm font-light text-nuvi-white/80">
+            <li><a href="#" class="hover:text-nuvi-light transition-colors">Inicio</a></li>
+            <li><a href="#nosotros" class="hover:text-nuvi-light transition-colors">Nosotros</a></li>
+            <li><a href="#services-section" class="hover:text-nuvi-light transition-colors">Servicios</a></li>
+            <li><a href="#project-highlight" class="hover:text-nuvi-light transition-colors">Proyectos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold tracking-wider text-nuvi-beige uppercase mb-6">Servicios Clave</h3>
+          <ul class="space-y-3 text-sm font-light text-nuvi-white/80">
+            <li><a href="#" class="hover:text-nuvi-light transition-colors">Mantenimiento Electromecánico</a></li>
+            <li><a href="#" class="hover:text-nuvi-light transition-colors">HVAC y Climatización</a></li>
+            <li><a href="#" class="hover:text-nuvi-light transition-colors">Sistemas Eléctricos</a></li>
+            <li><a href="#" class="hover:text-nuvi-light transition-colors">Facility Management</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold tracking-wider text-nuvi-beige uppercase mb-6">Contacto</h3>
+          <ul class="space-y-3 text-sm font-light text-nuvi-white/80">
+            <li>Av. Técnica 248, Piso 4<br>Zona corporativa, CDMX</li>
+            <li><a href="tel:+525512345678" class="hover:text-nuvi-light transition-colors">+52 55 1234 5678</a></li>
+            <li><a href="mailto:contacto@nuvisoluciones.com" class="hover:text-nuvi-light transition-colors">contacto@nuvisoluciones.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-nuvi-light/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-xs font-light text-nuvi-beige">&copy; 2024 NUVI Engineering. Todos los derechos reservados.</p>
+        <div class="flex space-x-6 text-sm text-nuvi-beige">
+          <a href="#" class="hover:text-nuvi-white transition-colors">LinkedIn</a>
+          <a href="#" class="hover:text-nuvi-white transition-colors">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
