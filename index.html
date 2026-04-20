@@ -1,258 +1,1447 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NUVI ofrece soluciones civiles y electromecánicas para la continuidad operativa, el mantenimiento técnico y la gestión integral de instalaciones.">
-  <title>NUVI | Soluciones civiles y electromecánicas</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: { colors: { 'nuvi-white': '#FAFAF7', 'nuvi-cream': '#EFECE5', 'nuvi-beige': '#DCD4C9', 'nuvi-light': '#9E7E61', 'nuvi-dark': '#2A2118' }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] } } }
-    }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NUVI — Soluciones civiles y electromecánicas. Mantenimiento integral de infraestructuras para empresas, edificios e industrias.">
+<title>NUVI — Soluciones civiles y electromecánicas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   VARIABLES & RESET
+   ============================================================ */
+:root {
+  --wine:      #6E2232;
+  --wine-d:    #521929;
+  --wine-l:    #9B4458;
+  --wine-pale: #F7ECEE;
+  --bg:        #F5F3F0;
+  --bg-alt:    #EEEBE6;
+  --white:     #FFFFFF;
+  --text:      #181818;
+  --text-2:    #4A4848;
+  --text-3:    #7C7A7A;
+  --border:    #E0DCD7;
+  --border-l:  #EAE7E3;
+  --sh1: 0 2px 8px rgba(0,0,0,0.05);
+  --sh2: 0 6px 24px rgba(0,0,0,0.08);
+  --sh3: 0 12px 48px rgba(0,0,0,0.12);
+  --r:  6px;
+  --r2: 12px;
+  --t:  0.3s ease;
+  --mw: 1240px;
+  --nav-h: 80px;
+  --wa-green: #25D366;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; border: none; cursor: pointer; background: none; }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container { max-width: var(--mw); margin: 0 auto; padding: 0 2rem; }
+section { padding: 100px 0; }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.65rem;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--wine); margin-bottom: 1.25rem;
+}
+.eyebrow::before {
+  content: ''; display: block;
+  width: 22px; height: 2px;
+  background: var(--wine); border-radius: 2px; flex-shrink: 0;
+}
+.eyebrow-center { justify-content: center; }
+.eyebrow-center::before { display: none; }
+.eyebrow-center::after {
+  content: ''; display: block;
+  width: 22px; height: 2px;
+  background: var(--wine); border-radius: 2px; flex-shrink: 0;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3vw, 2.6rem);
+  font-weight: 800; color: var(--text);
+  line-height: 1.16; letter-spacing: -0.022em;
+  margin-bottom: 1rem;
+}
+.section-title span { color: var(--wine); }
+.section-sub {
+  font-size: 1.05rem; color: var(--text-2);
+  line-height: 1.75; max-width: 580px;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.875rem; font-weight: 600;
+  padding: 0.8rem 1.75rem; border-radius: var(--r);
+  transition: all var(--t); cursor: pointer;
+  letter-spacing: 0.01em; line-height: 1;
+}
+.btn-primary { background: var(--wine); color: #fff; }
+.btn-primary:hover {
+  background: var(--wine-d); transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(110,34,50,0.32); color: #fff;
+}
+.btn-ghost {
+  background: rgba(255,255,255,0.08); color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.2);
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px); color: #fff;
+}
+.btn-outline-dark {
+  background: transparent; color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.btn-outline-dark:hover { border-color: var(--wine); color: var(--wine); transform: translateY(-2px); }
+.btn-wa-card {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--wa-green); color: #fff;
+  font-size: 0.82rem; font-weight: 600;
+  padding: 0.65rem 1.25rem; border-radius: var(--r);
+  transition: all var(--t); width: 100%; justify-content: center;
+}
+.btn-wa-card:hover { background: #1EBE5A; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,211,102,0.32); color: #fff; }
+.btn-arrow-r { transition: transform var(--t); }
+.btn:hover .btn-arrow-r { transform: translateX(4px); }
+
+/* ============================================================
+   HEADER / NAVBAR
+   ============================================================ */
+#header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  transition: background var(--t), box-shadow var(--t), height var(--t);
+}
+#header.scrolled {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--sh1); height: 68px;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.nav-logo { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+.nav-logo img { height: 44px; width: auto; object-fit: contain; }
+.nav-logo-wordmark { display: flex; flex-direction: column; line-height: 1; }
+.nav-logo-name {
+  font-size: 1.4rem; font-weight: 800; color: #fff;
+  letter-spacing: 0.1em; transition: color var(--t);
+}
+#header.scrolled .nav-logo-name { color: var(--wine); }
+.nav-logo-tag {
+  font-size: 0.6rem; font-weight: 500; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px;
+  transition: color var(--t);
+}
+#header.scrolled .nav-logo-tag { color: var(--text-3); }
+
+.nav-links { display: flex; align-items: center; gap: 1.75rem; }
+.nav-links a {
+  font-size: 0.82rem; font-weight: 500;
+  color: rgba(255,255,255,0.75); position: relative; transition: color var(--t);
+}
+#header.scrolled .nav-links a { color: var(--text-2); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1.5px; background: var(--wine);
+  border-radius: 2px; transition: width var(--t);
+}
+.nav-links a:hover, #header.scrolled .nav-links a:hover { color: var(--wine); }
+.nav-links a:hover::after { width: 100%; }
+
+.btn-nav {
+  background: var(--wine); color: #fff;
+  padding: 0.58rem 1.25rem; border-radius: var(--r);
+  font-size: 0.82rem; font-weight: 600;
+  transition: all var(--t); white-space: nowrap; flex-shrink: 0;
+}
+.btn-nav:hover { background: var(--wine-d); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(110,34,50,0.38); color: #fff; }
+
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; border-radius: 2px; transition: all var(--t); background: #fff; }
+#header.scrolled .nav-hamburger span { background: var(--text); }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-drawer {
+  position: fixed; inset: 0; z-index: 999; background: var(--white);
+  display: flex; flex-direction: column; padding: 7rem 2rem 3rem;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-drawer.open { transform: translateX(0); }
+.nav-drawer a {
+  font-size: 1.3rem; font-weight: 600; color: var(--text);
+  padding: 1rem 0; border-bottom: 1px solid var(--border); display: block;
+  transition: color var(--t);
+}
+.nav-drawer a:hover { color: var(--wine); }
+.drawer-cta {
+  margin-top: 2.5rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--wine); color: #fff !important;
+  padding: 0.9rem 2rem; border-radius: var(--r);
+  font-size: 1rem; font-weight: 600; border-bottom: none !important;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#inicio {
+  min-height: 100vh; position: relative; overflow: hidden;
+  display: flex; align-items: center;
+  background: #131313;
+  padding: calc(var(--nav-h) + 64px) 0 80px;
+}
+.hero-bg-img {
+  position: absolute; inset: 0;
+  background: url('images/hero-bg.jpg') center / cover no-repeat; opacity: 0.12;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(115deg, #0E0E0E 45%, rgba(20,12,15,0.85) 100%);
+}
+.hero-blob-1 {
+  position: absolute;
+  width: 720px; height: 720px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(110,34,50,0.22) 0%, transparent 68%);
+  right: -160px; top: 50%; transform: translateY(-55%);
+  filter: blur(90px); pointer-events: none;
+}
+.hero-blob-2 {
+  position: absolute;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(155,68,88,0.12) 0%, transparent 70%);
+  right: 28%; bottom: -80px;
+  filter: blur(70px); pointer-events: none;
+}
+.hero-blob-3 {
+  position: absolute;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(82,25,41,0.18) 0%, transparent 70%);
+  left: -60px; top: 20%;
+  filter: blur(80px); pointer-events: none;
+}
+.hero-accent-line {
+  position: absolute; right: 0; top: 15%; bottom: 15%; width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(110,34,50,0.6), transparent);
+}
+.hero-content { position: relative; z-index: 2; animation: heroIn 0.9s cubic-bezier(0.4,0,0.2,1) both; }
+@keyframes heroIn { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+.hero-label { display: inline-flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; }
+.hero-label-line { display: block; width: 3px; height: 22px; background: var(--wine); border-radius: 2px; }
+.hero-label-text { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.hero-h1 { font-size: clamp(2.25rem, 4.8vw, 4rem); font-weight: 800; color: #fff; line-height: 1.1; letter-spacing: -0.028em; margin-bottom: 1.5rem; max-width: 740px; }
+.hero-h1 em { font-style: normal; color: var(--wine-l); }
+.hero-p { font-size: 1.08rem; color: rgba(255,255,255,0.55); line-height: 1.8; max-width: 560px; margin-bottom: 2.75rem; }
+.hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.hero-divider { width: 100%; height: 1px; background: rgba(255,255,255,0.07); margin: 3.5rem 0 2.5rem; }
+.hero-stats { display: flex; gap: 3.5rem; flex-wrap: wrap; }
+.hero-stat-val { font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: -0.04em; line-height: 1; }
+.hero-stat-val sup { font-size: 1rem; color: var(--wine-l); font-weight: 700; }
+.hero-stat-lbl { font-size: 0.74rem; font-weight: 500; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.4rem; }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#nosotros { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 5rem; align-items: center; }
+.about-visual { position: relative; }
+.about-ph {
+  width: 100%; height: 500px; border-radius: var(--r2); overflow: hidden;
+  background: linear-gradient(150deg, #1A1212 0%, #261818 50%, #3A2020 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  position: relative;
+}
+.about-ph::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(110,34,50,0.18) 0%, transparent 70%);
+}
+.about-ph::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(155,68,88,0.3), transparent);
+}
+.about-ph svg { width: 72px; height: 72px; color: rgba(255,255,255,0.1); }
+.about-ph-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+.about-badge {
+  position: absolute; bottom: -2rem; right: -2rem;
+  background: var(--wine); color: #fff; padding: 1.5rem 2rem; border-radius: var(--r); text-align: center; box-shadow: var(--sh3);
+}
+.about-badge-n { font-size: 2.25rem; font-weight: 800; line-height: 1; letter-spacing: -0.04em; }
+.about-badge-l { font-size: 0.7rem; font-weight: 500; opacity: 0.75; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.4; }
+.about-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; margin-top: 2rem; }
+.about-pill {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 1rem 1.1rem; background: var(--bg); border: 1px solid var(--border-l);
+  border-radius: var(--r); transition: all var(--t);
+}
+.about-pill:hover { border-color: rgba(110,34,50,0.25); background: var(--wine-pale); }
+.about-pill-icon { width: 34px; height: 34px; flex-shrink: 0; background: var(--wine-pale); border-radius: var(--r); display: flex; align-items: center; justify-content: center; color: var(--wine); }
+.about-pill-icon svg { width: 17px; height: 17px; }
+.about-pill-text { font-size: 0.84rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+#servicios { background: var(--bg); }
+.services-head { text-align: center; margin-bottom: 4.5rem; }
+.services-head .section-sub { margin: 0 auto; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+.svc-card { background: var(--white); border-radius: var(--r2); border: 1px solid var(--border-l); overflow: hidden; transition: box-shadow var(--t), transform var(--t); display: flex; flex-direction: column; }
+.svc-card:hover { box-shadow: var(--sh3); transform: translateY(-5px); }
+.svc-card-top { padding: 2rem 2rem 1.75rem; border-bottom: 1px solid var(--border-l); position: relative; }
+.svc-card-top::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--wine), var(--wine-l)); }
+.svc-icon { width: 54px; height: 54px; background: var(--wine-pale); border-radius: var(--r); display: flex; align-items: center; justify-content: center; color: var(--wine); margin-bottom: 1.25rem; }
+.svc-icon svg { width: 27px; height: 27px; }
+.svc-cat-tag { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--wine); display: block; margin-bottom: 0.35rem; }
+.svc-card-title { font-size: 1.1rem; font-weight: 750; color: var(--text); line-height: 1.3; }
+.svc-list { padding: 1.5rem 2rem 2rem; flex: 1; }
+.svc-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border-l); }
+.svc-item:last-child { border-bottom: none; padding-bottom: 0; }
+.svc-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--wine); margin-top: 0.55rem; flex-shrink: 0; opacity: 0.65; }
+.svc-item-txt { font-size: 0.875rem; color: var(--text-2); line-height: 1.55; font-weight: 500; }
+
+/* ============================================================
+   METRICS
+   ============================================================ */
+.metrics-band {
+  background: linear-gradient(100deg, var(--wine-d) 0%, var(--wine) 50%, var(--wine-l) 100%);
+  padding: 64px 0;
+  position: relative; overflow: hidden;
+}
+.metrics-band::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 100% at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+}
+.metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+.metric-val { font-size: 2.6rem; font-weight: 800; color: #fff; letter-spacing: -0.04em; line-height: 1; }
+.metric-val sup { font-size: 1.2rem; color: rgba(255,255,255,0.6); }
+.metric-lbl { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.6rem; }
+
+/* ============================================================
+   CATALOG
+   ============================================================ */
+#catalogo { background: var(--bg-alt); }
+.catalog-head { text-align: center; margin-bottom: 3rem; }
+.catalog-head .section-sub { margin: 0 auto; }
+
+.catalog-filters {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.6rem; flex-wrap: wrap; margin-bottom: 3rem;
+}
+.filter-btn {
+  font-size: 0.82rem; font-weight: 600; padding: 0.55rem 1.25rem;
+  border-radius: 100px; border: 1.5px solid var(--border);
+  background: var(--white); color: var(--text-2);
+  cursor: pointer; transition: all var(--t);
+  letter-spacing: 0.01em;
+}
+.filter-btn:hover { border-color: var(--wine); color: var(--wine); }
+.filter-btn.active { background: var(--wine); color: #fff; border-color: var(--wine); box-shadow: 0 4px 14px rgba(110,34,50,0.25); }
+
+.catalog-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.cat-card {
+  background: var(--white); border-radius: var(--r2);
+  border: 1px solid var(--border-l); overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: box-shadow var(--t), transform var(--t);
+}
+.cat-card:hover { box-shadow: var(--sh3); transform: translateY(-5px); }
+.cat-card.hidden { display: none; }
+
+.cat-card-img {
+  height: 160px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.cat-card-img svg { width: 52px; height: 52px; position: relative; z-index: 1; transition: transform 0.4s ease; }
+.cat-card:hover .cat-card-img svg { transform: scale(1.1); }
+.cat-card-img [class^="c-"] { color: rgba(255,255,255,0.2); }
+
+.cat-card-img.c-elec {
+  background: linear-gradient(145deg, #10101E 0%, #1C1430 100%);
+  box-shadow: inset 0 -1px 0 rgba(155,68,88,0.15), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-hvac {
+  background: linear-gradient(145deg, #0A1928 0%, #142440 100%);
+  box-shadow: inset 0 -1px 0 rgba(20,36,64,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-bomb {
+  background: linear-gradient(145deg, #0A1E28 0%, #122C38 100%);
+  box-shadow: inset 0 -1px 0 rgba(18,44,56,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-fire {
+  background: linear-gradient(145deg, #1E0808 0%, #380E0E 100%);
+  box-shadow: inset 0 -1px 0 rgba(155,20,20,0.2), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-civil {
+  background: linear-gradient(145deg, #101510 0%, #1C2818 100%);
+  box-shadow: inset 0 -1px 0 rgba(40,60,30,0.2), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-plumb {
+  background: linear-gradient(145deg, #0A1820 0%, #142430 100%);
+  box-shadow: inset 0 -1px 0 rgba(20,36,48,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-paint {
+  background: linear-gradient(145deg, #1A1408 0%, #2E2410 100%);
+  box-shadow: inset 0 -1px 0 rgba(46,36,16,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-struct {
+  background: linear-gradient(145deg, #141414 0%, #242018 100%);
+  box-shadow: inset 0 -1px 0 rgba(36,32,24,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-iguala {
+  background: linear-gradient(145deg, #160C1C 0%, #261430 100%);
+  box-shadow: inset 0 -1px 0 rgba(110,34,50,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-light {
+  background: linear-gradient(145deg, #1A1208 0%, #2C2010 100%);
+  box-shadow: inset 0 -1px 0 rgba(44,32,16,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-sec {
+  background: linear-gradient(145deg, #0A1318 0%, #121E28 100%);
+  box-shadow: inset 0 -1px 0 rgba(18,30,40,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+.cat-card-img.c-audit {
+  background: linear-gradient(145deg, #160C0C 0%, #241010 100%);
+  box-shadow: inset 0 -1px 0 rgba(110,34,50,0.2), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.2);
+}
+
+.cat-badge {
+  position: absolute; top: 0.875rem; left: 0.875rem;
+  background: rgba(0,0,0,0.45); color: rgba(255,255,255,0.8);
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.cat-card-body { padding: 1.25rem 1.4rem 0.75rem; flex: 1; }
+.cat-card-title { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; line-height: 1.35; }
+.cat-card-desc { font-size: 0.8rem; color: var(--text-3); line-height: 1.6; }
+
+.cat-card-foot { padding: 1rem 1.4rem 1.4rem; border-top: 1px solid var(--border-l); margin-top: 1rem; }
+.cat-price {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; font-weight: 700; color: var(--wine);
+  margin-bottom: 0.875rem;
+}
+.cat-price svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* ============================================================
+   SECTORS
+   ============================================================ */
+#sectores { background: var(--white); }
+.sectors-head { text-align: center; margin-bottom: 4rem; }
+.sectors-head .section-sub { margin: 0 auto; }
+.sectors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+.sector-card { background: var(--bg); border-radius: var(--r2); border: 1px solid var(--border-l); padding: 2rem 1.5rem; text-align: center; transition: all var(--t); cursor: default; }
+.sector-card:hover { background: var(--wine-pale); border-color: rgba(110,34,50,0.22); transform: translateY(-4px); box-shadow: var(--sh2); }
+.sector-icon { width: 58px; height: 58px; background: var(--white); border-radius: var(--r); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.35rem; color: var(--wine); box-shadow: var(--sh1); transition: all var(--t); }
+.sector-card:hover .sector-icon { background: var(--wine); color: #fff; box-shadow: none; }
+.sector-icon svg { width: 28px; height: 28px; }
+.sector-name { font-size: 0.9rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+.sector-desc { font-size: 0.77rem; color: var(--text-3); margin-top: 0.4rem; line-height: 1.5; }
+
+/* ============================================================
+   BENEFITS
+   ============================================================ */
+#beneficios { background: #0E0E0E; position: relative; overflow: hidden; }
+.benefits-pattern {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(110,34,50,0.13) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(82,25,41,0.10) 0%, transparent 100%);
+}
+.benefits-inner { position: relative; z-index: 2; }
+.benefits-header { margin-bottom: 4rem; }
+.benefits-header .section-title { color: #fff; }
+.benefits-header .section-sub { color: rgba(255,255,255,0.45); }
+.benefits-header .eyebrow { color: var(--wine-l); }
+.benefits-header .eyebrow::before { background: var(--wine-l); }
+.benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.benefit-card { padding: 2.25rem 2rem; border-radius: var(--r2); border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.04); transition: all var(--t); }
+.benefit-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(110,34,50,0.6); transform: translateY(-3px); }
+.benefit-icon { color: var(--wine-l); margin-bottom: 1.5rem; }
+.benefit-icon svg { width: 32px; height: 32px; }
+.benefit-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.6rem; }
+.benefit-text { font-size: 0.875rem; color: rgba(255,255,255,0.42); line-height: 1.75; }
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+#proceso { background: var(--bg); }
+.process-head { text-align: center; margin-bottom: 5rem; }
+.process-head .section-sub { margin: 0 auto; }
+.process-track { display: grid; grid-template-columns: repeat(6, 1fr); position: relative; }
+.process-track::before { content: ''; position: absolute; top: 27px; left: calc(100%/12); right: calc(100%/12); height: 1px; background: linear-gradient(90deg, var(--wine) 0%, var(--border) 100%); }
+.process-step { text-align: center; padding: 0 0.75rem; position: relative; }
+.process-n { width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.75rem; font-size: 0.82rem; font-weight: 800; color: var(--text-3); position: relative; z-index: 1; box-shadow: var(--sh1); transition: all var(--t); }
+.process-step:first-child .process-n { background: var(--wine); color: #fff; border-color: var(--wine); box-shadow: 0 4px 16px rgba(110,34,50,0.35); }
+.process-step-title { font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.process-step-desc { font-size: 0.78rem; color: var(--text-3); line-height: 1.6; }
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+#proyectos { background: var(--white); }
+.projects-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+.projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.proj-card { border-radius: var(--r2); overflow: hidden; border: 1px solid var(--border-l); transition: all var(--t); }
+.proj-card:hover { box-shadow: var(--sh3); transform: translateY(-5px); }
+.proj-img { height: 200px; position: relative; overflow: hidden; }
+.proj-img-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.proj-img-ph svg { width: 52px; height: 52px; }
+.proj-img-ph.elec {
+  background: linear-gradient(140deg,#12101E 0%,#1E1530 60%,#2A1F3A 100%);
+  color: rgba(255,255,255,0.15);
+  box-shadow: inset 0 -40px 60px rgba(110,34,50,0.12);
+}
+.proj-img-ph.civil {
+  background: linear-gradient(140deg,#101510 0%,#18201A 60%,#243020 100%);
+  color: rgba(255,255,255,0.15);
+  box-shadow: inset 0 -40px 60px rgba(36,48,32,0.3);
+}
+.proj-img-ph.facility {
+  background: linear-gradient(140deg,#130F18 0%,#1E1522 60%,#2A1A30 100%);
+  color: rgba(255,255,255,0.15);
+  box-shadow: inset 0 -40px 60px rgba(110,34,50,0.1);
+}
+.proj-img-ph.energy {
+  background: linear-gradient(140deg,#180F10 0%,#261518 60%,#3A2020 100%);
+  color: rgba(255,255,255,0.15);
+  box-shadow: inset 0 -40px 60px rgba(110,34,50,0.15);
+}
+.proj-badge { position: absolute; top: 1rem; left: 1rem; background: var(--wine); color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.28rem 0.65rem; border-radius: 4px; }
+.proj-body { padding: 1.25rem 1.5rem 1.5rem; }
+.proj-title { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; line-height: 1.4; }
+.proj-meta { font-size: 0.77rem; color: var(--text-3); }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+#faq { background: var(--bg); }
+.faq-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+.faq-side { position: sticky; top: 100px; }
+.faq-side .section-sub { margin-top: 1rem; margin-bottom: 2rem; }
+.faq-contact-hint {
+  display: flex; align-items: center; gap: 0.875rem;
+  background: var(--white); border: 1px solid var(--border-l);
+  border-radius: var(--r2); padding: 1.25rem 1.5rem;
+  margin-top: 2rem; transition: all var(--t);
+}
+.faq-contact-hint:hover { border-color: var(--wa-green); transform: translateY(-2px); box-shadow: var(--sh2); }
+.faq-ch-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: #E7F9EE; border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center; color: var(--wa-green);
+}
+.faq-ch-icon svg { width: 22px; height: 22px; }
+.faq-ch-text strong { display: block; font-size: 0.875rem; font-weight: 700; color: var(--text); }
+.faq-ch-text span { font-size: 0.78rem; color: var(--text-3); }
+
+.faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.faq-item {
+  background: var(--white); border: 1px solid var(--border-l);
+  border-radius: var(--r2); overflow: hidden;
+  transition: border-color var(--t), box-shadow var(--t);
+}
+.faq-item.open { border-color: rgba(110,34,50,0.25); box-shadow: var(--sh2); }
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer;
+  font-size: 0.92rem; font-weight: 600; color: var(--text);
+  user-select: none; transition: color var(--t);
+}
+.faq-q:hover { color: var(--wine); }
+.faq-item.open .faq-q { color: var(--wine); }
+.faq-icon {
+  width: 30px; height: 30px; flex-shrink: 0;
+  border-radius: 50%; border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-3); transition: all var(--t);
+}
+.faq-item.open .faq-icon { background: var(--wine); border-color: var(--wine); color: #fff; transform: rotate(45deg); }
+.faq-icon svg { width: 14px; height: 14px; }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1), padding 0.38s ease;
+}
+.faq-item.open .faq-a { max-height: 400px; }
+.faq-a-inner {
+  padding: 0 1.5rem 1.5rem;
+  font-size: 0.875rem; color: var(--text-2); line-height: 1.8;
+  border-top: 1px solid var(--border-l);
+  padding-top: 1rem;
+}
+
+/* ============================================================
+   CTA BANNER
+   ============================================================ */
+#cta-section { background: var(--bg-alt); padding: 80px 0; }
+.cta-box {
+  background: #0E0E0E; border-radius: var(--r2);
+  padding: 5rem 4rem; text-align: center;
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.cta-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--wine), var(--wine-l), var(--wine), transparent);
+}
+.cta-box-pattern {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 70% at 50% 110%, rgba(110,34,50,0.18) 0%, transparent 100%),
+    radial-gradient(ellipse 30% 40% at 15% 20%, rgba(82,25,41,0.10) 0%, transparent 100%);
+}
+.cta-box-content { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; }
+.cta-box-eyebrow { color: var(--wine-l); }
+.cta-box-eyebrow::before { background: var(--wine-l); }
+.cta-box-title { font-size: clamp(1.8rem, 3vw, 2.75rem); font-weight: 800; color: #fff; line-height: 1.18; letter-spacing: -0.022em; margin-bottom: 1.25rem; }
+.cta-box-text { font-size: 1rem; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 2.5rem; }
+.cta-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#contacto {
+  background: #0A0A0A; padding: 80px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.6fr; gap: 4rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand-logo { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+.footer-brand-logo img { height: 40px; filter: brightness(0) invert(1); opacity: 0.65; }
+.footer-brand-name { font-size: 1.35rem; font-weight: 800; color: #fff; letter-spacing: 0.1em; }
+.footer-brand-tag { font-size: 0.58rem; font-weight: 500; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
+.footer-brand-desc { font-size: 0.875rem; color: rgba(255,255,255,0.35); line-height: 1.8; max-width: 280px; }
+.footer-col-h { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.5rem; display: block; }
+.footer-links { display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-links a { font-size: 0.875rem; color: rgba(255,255,255,0.45); transition: color var(--t); }
+.footer-links a:hover { color: rgba(255,255,255,0.85); }
+.footer-contact-row { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1.1rem; }
+.footer-c-icon { width: 34px; height: 34px; flex-shrink: 0; background: rgba(255,255,255,0.05); border-radius: var(--r); display: flex; align-items: center; justify-content: center; color: var(--wine-l); }
+.footer-c-icon svg { width: 15px; height: 15px; }
+.footer-c-text { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+.footer-bottom { padding: 1.75rem 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
+.footer-socials { display: flex; gap: 0.75rem; }
+.footer-soc { width: 36px; height: 36px; border-radius: var(--r); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.3); transition: all var(--t); }
+.footer-soc:hover { border-color: var(--wine); color: var(--wine-l); }
+.footer-soc svg { width: 15px; height: 15px; }
+
+/* ============================================================
+   WHATSAPP FLOAT BUTTON
+   ============================================================ */
+.wa-float {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 990;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;
+}
+.wa-tooltip {
+  background: var(--white); color: var(--text);
+  font-size: 0.8rem; font-weight: 600;
+  padding: 0.5rem 1rem; border-radius: 100px;
+  box-shadow: var(--sh2); white-space: nowrap;
+  opacity: 0; transform: translateX(8px);
+  transition: all 0.25s ease; pointer-events: none;
+}
+.wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
+.wa-btn {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--wa-green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.40);
+  transition: all 0.25s ease; position: relative;
+  text-decoration: none;
+}
+.wa-btn:hover { background: #1EBE5A; transform: scale(1.08); box-shadow: 0 8px 32px rgba(37,211,102,0.5); }
+.wa-btn svg { width: 30px; height: 30px; }
+.wa-pulse {
+  position: absolute; inset: -4px; border-radius: 50%;
+  border: 2px solid var(--wa-green); opacity: 0;
+  animation: waPulse 2.5s ease-out infinite;
+}
+.wa-pulse:nth-child(2) { animation-delay: 0.8s; }
+@keyframes waPulse {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* ============================================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================================ */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.10s; }
+.d2 { transition-delay: 0.20s; }
+.d3 { transition-delay: 0.30s; }
+.d4 { transition-delay: 0.40s; }
+.d5 { transition-delay: 0.50s; }
+
+/* catalog card reveal */
+.cat-card {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--t);
+}
+.cat-card.in { opacity: 1; transform: translateY(0); }
+.cat-card.hidden { display: none !important; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+  .services-grid  { grid-template-columns: 1fr; max-width: 620px; margin: 0 auto; }
+  .catalog-grid   { grid-template-columns: repeat(3, 1fr); }
+  .sectors-grid   { grid-template-columns: repeat(3, 1fr); }
+  .benefits-grid  { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid    { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .projects-grid  { grid-template-columns: repeat(2, 1fr); }
+  .metrics-row    { grid-template-columns: repeat(2, 1fr); gap: 3.5rem; }
+  .about-grid     { grid-template-columns: 1fr; gap: 3.5rem; }
+  .about-visual   { order: -1; }
+  .about-badge    { right: 1.5rem; }
+  .faq-layout     { grid-template-columns: 1fr; gap: 3rem; }
+  .faq-side       { position: static; }
+}
+@media (max-width: 768px) {
+  :root { --nav-h: 68px; }
+  .nav-links, .btn-nav { display: none; }
+  .nav-hamburger { display: flex; }
+  section { padding: 72px 0; }
+  .container { padding: 0 1.25rem; }
+  .services-grid  { grid-template-columns: 1fr; max-width: 100%; }
+  .catalog-grid   { grid-template-columns: repeat(2, 1fr); }
+  .sectors-grid   { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid  { grid-template-columns: 1fr; }
+  .projects-grid  { grid-template-columns: 1fr; }
+  .footer-grid    { grid-template-columns: 1fr; gap: 2.5rem; }
+  .footer-bottom  { flex-direction: column; text-align: center; }
+  .cta-box        { padding: 3rem 1.75rem; }
+  .about-pills    { grid-template-columns: 1fr; }
+  .process-track  { grid-template-columns: 1fr; gap: 2.5rem; }
+  .process-track::before { display: none; }
+  .process-step   { display: grid; grid-template-columns: 56px 1fr; gap: 1.25rem; align-items: start; text-align: left; }
+  .process-n      { margin: 0; }
+  .wa-float       { bottom: 1.5rem; right: 1.5rem; }
+}
+@media (max-width: 520px) {
+  .hero-h1        { font-size: 2rem; }
+  .hero-actions   { flex-direction: column; align-items: flex-start; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-stats     { gap: 2rem; }
+  .catalog-grid   { grid-template-columns: 1fr; }
+  .sectors-grid   { grid-template-columns: repeat(2, 1fr); }
+  .cta-actions    { flex-direction: column; }
+  .cta-actions .btn { width: 100%; justify-content: center; }
+  .metrics-row    { grid-template-columns: repeat(2, 1fr); }
+}
+
+</style>
 </head>
-<body class="antialiased selection:bg-nuvi-light selection:text-white">
-  <header class="fixed w-full top-0 z-50 nav-glass transition-all duration-300" id="navbar">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-      <div class="flex items-center justify-between h-28 md:h-36">
-        <div class="flex-shrink-0 flex items-center cursor-pointer gs-nav-item">
-          <img src="assets/images/logo-nuvi.jpeg" alt="NUVI Logo" class="h-20 md:h-28 w-auto mix-blend-multiply">
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <img src="images/logo.png" alt="NUVI" onerror="this.style.display='none'">
+        <div class="nav-logo-wordmark">
+          <span class="nav-logo-name">NUVI</span>
+          <span class="nav-logo-tag">Soluciones civiles y electromecánicas</span>
         </div>
-        <nav class="hidden md:flex space-x-8 gs-nav-item">
-          <a href="#" class="text-sm font-medium hover:text-nuvi-light transition-colors">Inicio</a>
-          <a href="#" class="text-sm font-medium hover:text-nuvi-light transition-colors">Nosotros</a>
-          <a href="#" class="text-sm font-medium hover:text-nuvi-light transition-colors">Servicios</a>
-          <a href="#" class="text-sm font-medium hover:text-nuvi-light transition-colors">Proyectos</a>
-        </nav>
-        <div class="hidden md:flex gs-nav-item"><a href="#" class="bg-nuvi-dark text-nuvi-white px-6 py-3 text-sm font-medium hover:bg-nuvi-light transition-all duration-300 shadow-lg shadow-nuvi-dark/10">Contactar</a></div>
-      </div>
-    </div>
-  </header>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="#cta-section" class="btn-nav">Solicitar evaluación</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <section class="relative min-h-screen pt-40 pb-20 lg:pt-56 lg:pb-28 flex items-center overflow-hidden">
-      <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          <div class="lg:col-span-5 flex flex-col justify-center relative z-10">
-            <div class="clip-text mb-4"><span class="gs-hero-text inline-block text-xs md:text-sm font-semibold tracking-[0.2em] text-nuvi-light uppercase">Ingeniería & Precisión</span></div>
-            <div class="clip-text mb-6"><h1 class="gs-hero-text font-serif text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] text-nuvi-dark">Estructuras<br><span class="italic font-light text-nuvi-light">Sólidas,</span><br>Sistemas Exactos.</h1></div>
-            <div class="clip-text mb-10"><p class="gs-hero-text text-base md:text-lg text-nuvi-dark/80 font-sans font-light leading-relaxed max-w-md">Diseñamos, implementamos y mantenemos sistemas electromecánicos de alto rendimiento corporativo.</p></div>
-          </div>
-          <div class="lg:col-span-7 relative w-full h-[50vh] lg:h-[75vh] mt-8 lg:mt-0 flex items-center justify-center gs-hero-visual">
-            <div class="absolute inset-0 bg-nuvi-cream rounded-sm transform rotate-2 scale-95 opacity-50 transition-transform duration-700 gs-shape"></div>
-            <div class="relative w-full h-full grid grid-cols-12 grid-rows-6 gap-4 p-4 lg:p-0">
-              <div class="col-span-12 row-span-4 lg:col-span-8 lg:row-span-6 lg:col-start-1 lg:row-start-1 video-placeholder noise-overlay z-20 shadow-2xl flex items-center justify-center group overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop" alt="Sistema NUVI" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply group-hover:scale-105 transition-transform duration-1000 ease-out">
-                <div class="absolute bottom-6 left-6 text-white text-xs tracking-widest uppercase font-semibold"><span class="w-2 h-2 inline-block bg-nuvi-light rounded-full mr-2 animate-pulse"></span> Sistema IA en curso</div>
-              </div>
-              <div class="hidden lg:flex col-span-4 row-span-3 col-start-9 row-start-4 bg-nuvi-dark text-nuvi-white flex-col justify-end p-6 relative overflow-hidden shadow-lg gs-img-small">
-                <span class="text-3xl font-serif mb-1">+25</span><span class="text-xs uppercase tracking-wider text-nuvi-white/70">Años de excelencia<br>en ingeniería</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<nav class="nav-drawer" id="drawer" aria-hidden="true">
+  <a href="#inicio">Inicio</a>
+  <a href="#servicios">Servicios</a>
+  <a href="#catalogo">Catálogo</a>
+  <a href="#nosotros">Nosotros</a>
+  <a href="#proyectos">Proyectos</a>
+  <a href="#faq">Preguntas frecuentes</a>
+  <a href="#contacto">Contacto</a>
+  <a href="#cta-section" class="drawer-cta">
+    Solicitar evaluación
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</nav>
 
-    <!-- Franja de Confianza -->
-    <section class="border-y border-nuvi-beige bg-nuvi-cream py-10 relative z-20">
-      <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-nuvi-beige">
-        <div><span class="block font-serif text-4xl text-nuvi-dark mb-1">+48</span><span class="text-xs text-nuvi-dark/70 uppercase tracking-widest">Proyectos Ejecutados</span></div>
-        <div><span class="block font-serif text-4xl text-nuvi-dark mb-1">+120</span><span class="text-xs text-nuvi-dark/70 uppercase tracking-widest">Sistemas Intervenidos</span></div>
-        <div><span class="block font-serif text-4xl text-nuvi-dark mb-1">100%</span><span class="text-xs text-nuvi-dark/70 uppercase tracking-widest">Cumplimiento Normativo</span></div>
-        <div><span class="block font-serif text-4xl text-nuvi-dark mb-1">24/7</span><span class="text-xs text-nuvi-dark/70 uppercase tracking-widest">Soporte Operativo</span></div>
-      </div>
-    </section>
+<main>
 
-    <!-- Sobre Nosotros -->
-    <section class="py-20 lg:py-32 bg-nuvi-white" id="nosotros">
-      <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div class="relative h-[400px] lg:h-[500px] rounded-xl overflow-hidden shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1504307651254-35680f356f58?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Equipo NUVI">
-          <div class="absolute inset-0 bg-nuvi-dark/20"></div>
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="inicio">
+  <div class="hero-bg-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-blob-1"></div>
+  <div class="hero-blob-2"></div>
+  <div class="hero-blob-3"></div>
+  <div class="hero-accent-line"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="hero-label-line"></span>
+        <span class="hero-label-text">Soluciones civiles y electromecánicas</span>
+      </div>
+      <h1 class="hero-h1">
+        Mantenimiento integral<br>
+        para la <em>continuidad operativa</em><br>
+        de tus instalaciones
+      </h1>
+      <p class="hero-p">En NUVI gestionamos el mantenimiento preventivo y correctivo de infraestructuras civiles y electromecánicas, garantizando operación continua, seguridad técnica y eficiencia energética.</p>
+      <div class="hero-actions">
+        <a href="#cta-section" class="btn btn-primary">
+          Solicitar evaluación
+          <svg class="btn-arrow-r" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#catalogo" class="btn btn-ghost">Ver catálogo</a>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val">+200<sup>+</sup></div>
+          <div class="hero-stat-lbl">Servicios ejecutados</div>
         </div>
         <div>
-          <span class="block text-sm font-semibold tracking-[0.2em] text-nuvi-light uppercase mb-4">SOBRE NUVI</span>
-          <h2 class="font-serif text-4xl md:text-5xl font-semibold text-nuvi-dark mb-6">Ingeniería que respalda su operación diaria.</h2>
-          <p class="text-nuvi-dark/80 font-light leading-relaxed mb-6">Somos una empresa orientada al mantenimiento civil y electromecánico con enfoque integral. Atendemos las necesidades de infraestructura desde la evaluación inicial hasta la ejecución y el seguimiento, cuidando la operación y el rendimiento de los equipos.</p>
-          <p class="text-nuvi-dark/80 font-light leading-relaxed mb-8">Nuestro trabajo combina criterio técnico, coordinación operativa y una lectura clara de las prioridades del cliente para intervenir sin perder de vista continuidad, costos y control.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CATÁLOGO DIGITAL DE SERVICIOS -->
-    <section class="py-20 lg:py-32 bg-nuvi-cream" id="services-section">
-      <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        <div class="text-center mb-24"><span class="block text-sm font-semibold tracking-[0.2em] text-nuvi-light uppercase mb-3">CATÁLOGO DIGITAL</span><h2 class="font-serif text-4xl md:text-5xl font-semibold text-nuvi-dark">Nuestras Soluciones</h2></div>
-
-        <!-- Categoría 1: Electromecánico -->
-        <div class="mb-24 catalog-category relative border-t border-nuvi-beige pt-12">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div class="lg:col-span-4 lg:sticky lg:top-40">
-              <span class="text-nuvi-light font-serif text-8xl opacity-20 absolute -top-8 -left-4 -z-10">01</span>
-              <h3 class="font-serif text-3xl md:text-4xl font-semibold text-nuvi-dark mb-4 relative z-10">Mantenimiento Electromecánico</h3>
-              <p class="text-nuvi-dark/80 font-light leading-relaxed">Nuestra área principal de mayor especialización técnica, abarcando desde la prevención hasta la corrección en equipos críticos de su infraestructura.</p>
-            </div>
-            <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Sistemas de Generación Eléctrica</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Mantenimiento preventivo y correctivo de plantas eléctricas de emergencia, transferencias automáticas (ATS) y sincronización.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Climatización y Refrigeración (HVAC)</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Instalación, diagnóstico y mantenimiento de aires acondicionados industriales y comerciales (Chillers, VRF, manejadoras, unidades paquete y divididas).</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Sistemas de Bombeo y Motores</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Reparación, rebobinado y mantenimiento de motores eléctricos, bombas de agua potable, bombas sumergibles y sistemas hidroneumáticos.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Sistemas Contra Incendios</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Mantenimiento riguroso a los cuartos de bombas contra incendio, red de rociadores, y sistemas de detección y alarma.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl md:col-span-2">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Infraestructura Eléctrica</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Diseño, instalación y mantenimiento de tableros eléctricos, distribución de media y baja tensión, corrección del factor de potencia (banco de capacitores) y sistemas de puesta a tierra.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categoría 2: Mantenimiento Civil -->
-        <div class="mb-24 catalog-category relative border-t border-nuvi-beige pt-12">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div class="lg:col-span-4 lg:sticky lg:top-40">
-              <span class="text-nuvi-light font-serif text-8xl opacity-20 absolute -top-8 -left-4 -z-10">02</span>
-              <h3 class="font-serif text-3xl md:text-4xl font-semibold text-nuvi-dark mb-4 relative z-10">Mantenimiento Civil</h3>
-              <p class="text-nuvi-dark/80 font-light leading-relaxed">Enfocados en la preservación de la infraestructura física, evitando el deterioro y manteniendo la estética y funcionalidad operativa.</p>
-            </div>
-            <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Impermeabilización</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Aplicación de sistemas avanzados de impermeabilización en techos, losas, cisternas y muros para prevenir filtraciones y humedad severa.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Instalaciones Hidrosanitarias</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Reparación y mantenimiento de redes de distribución de agua potable, drenajes pluviales, sistemas sanitarios y limpieza de trampas de grasa.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Pintura y Terminaciones</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Pintura industrial (epóxica para pisos de alto tráfico o naves), pintura comercial en interiores/exteriores y reparación de fisuras estructurales.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Estructuras y Remodelaciones</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Trabajos en plafones, divisiones en Sheetrock/Durock, instalación de pisos y mantenimiento especializado de herrería y soldadura.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categoría 3: Facility Management -->
-        <div class="catalog-category relative border-t border-nuvi-beige pt-12">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div class="lg:col-span-4 lg:sticky lg:top-40">
-              <span class="text-nuvi-light font-serif text-8xl opacity-20 absolute -top-8 -left-4 -z-10">03</span>
-              <h3 class="font-serif text-3xl md:text-4xl font-semibold text-nuvi-dark mb-4 relative z-10">Facility Management</h3>
-              <p class="text-nuvi-dark/80 font-light leading-relaxed">Asumimos el control del recinto asegurando su operación ininterrumpida, permitiendo que usted se enfoque al 100% en su negocio principal.</p>
-            </div>
-            <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Igualas de Mantenimiento Integral</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Contratos de servicio a largo plazo para la gestión total de su edificio, con visitas programadas y personal técnico especializado asignado.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Iluminación Integral</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Mantenimiento y actualización de iluminación interior, exterior, alumbrado de emergencia y sistemas avanzados de automatización de luces.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Seguridad y Control de Acceso</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Instalación y mantenimiento de circuitos cerrados (CCTV), controles de acceso biométricos o por tarjeta magnética, y puertas automáticas.</p>
-              </div>
-              <div class="service-detail-card bg-nuvi-white p-8 border border-nuvi-beige/60 hover:border-nuvi-light/80 transition-colors shadow-sm hover:shadow-xl">
-                <h4 class="font-serif text-xl font-semibold text-nuvi-dark mb-3">Auditorías y Eficiencia Energética</h4>
-                <p class="text-sm text-nuvi-dark/70 font-light leading-relaxed">Levantamientos de consumo, termografías a tableros eléctricos y propuestas de mejora directas para reducir el gasto energético en sus instalaciones.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="project-highlight" class="relative h-[90vh] lg:h-screen flex items-center justify-center parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1607027345933-40a35b81f34f?q=80&w=2070&auto=format&fit=crop');">
-      <div class="absolute inset-0 bg-nuvi-dark/60"></div>
-      <div class="relative max-w-7xl mx-auto px-6 lg:px-12 w-full flex justify-start">
-        <div class="gs-project-content bg-nuvi-white/95 backdrop-blur-sm p-8 md:p-12 max-w-xl shadow-2xl">
-          <span class="block text-sm font-semibold tracking-[0.2em] text-nuvi-light uppercase mb-4">Caso de Éxito</span>
-          <h2 class="font-serif text-3xl md:text-4xl font-semibold text-nuvi-dark mb-4">Modernización Planta Industrial</h2>
-          <p class="text-nuvi-dark/80 font-light mb-8">Renovación HVAC y sistema de control centralizado.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contacto CTA -->
-    <section class="bg-nuvi-white py-20 lg:py-32" id="contacto">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <h2 class="font-serif text-4xl md:text-5xl font-semibold text-nuvi-dark mb-6">Si su operación necesita orden técnico, conversemos.</h2>
-        <p class="text-lg text-nuvi-dark/80 font-light mb-10 max-w-2xl mx-auto">Estructuramos evaluaciones iniciales, revisamos necesidades actuales o preparamos propuestas de mantenimiento integral alineadas a su operación.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#" class="bg-nuvi-dark text-nuvi-white px-8 py-4 text-sm font-medium hover:bg-nuvi-light transition-all shadow-xl shadow-nuvi-dark/20">Solicitar evaluación</a>
-          <a href="mailto:contacto@nuvisoluciones.com" class="border border-nuvi-dark/20 text-nuvi-dark px-8 py-4 text-sm font-medium hover:border-nuvi-dark hover:bg-nuvi-dark hover:text-nuvi-white transition-all">contacto@nuvisoluciones.com</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-nuvi-dark text-nuvi-white pt-20 pb-10">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-        <div class="lg:col-span-1">
-          <div class="bg-nuvi-white inline-block p-3 rounded-lg mb-6 shadow-lg">
-            <img src="assets/images/logo-nuvi.jpeg" alt="NUVI Logo" class="h-10 w-auto mix-blend-multiply">
-          </div>
-          <p class="text-nuvi-beige font-light text-sm leading-relaxed">Soluciones civiles y electromecánicas para infraestructura corporativa, comercial e industrial con enfoque en continuidad operativa.</p>
+          <div class="hero-stat-val">+12<sup>años</sup></div>
+          <div class="hero-stat-lbl">De experiencia técnica</div>
         </div>
         <div>
-          <h3 class="text-sm font-semibold tracking-wider text-nuvi-beige uppercase mb-6">Navegación</h3>
-          <ul class="space-y-3 text-sm font-light text-nuvi-white/80">
-            <li><a href="#" class="hover:text-nuvi-light transition-colors">Inicio</a></li>
-            <li><a href="#nosotros" class="hover:text-nuvi-light transition-colors">Nosotros</a></li>
-            <li><a href="#services-section" class="hover:text-nuvi-light transition-colors">Servicios</a></li>
-            <li><a href="#project-highlight" class="hover:text-nuvi-light transition-colors">Proyectos</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold tracking-wider text-nuvi-beige uppercase mb-6">Servicios Clave</h3>
-          <ul class="space-y-3 text-sm font-light text-nuvi-white/80">
-            <li><a href="#" class="hover:text-nuvi-light transition-colors">Mantenimiento Electromecánico</a></li>
-            <li><a href="#" class="hover:text-nuvi-light transition-colors">HVAC y Climatización</a></li>
-            <li><a href="#" class="hover:text-nuvi-light transition-colors">Sistemas Eléctricos</a></li>
-            <li><a href="#" class="hover:text-nuvi-light transition-colors">Facility Management</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold tracking-wider text-nuvi-beige uppercase mb-6">Contacto</h3>
-          <ul class="space-y-3 text-sm font-light text-nuvi-white/80">
-            <li>Av. Técnica 248, Piso 4<br>Zona corporativa, CDMX</li>
-            <li><a href="tel:+525512345678" class="hover:text-nuvi-light transition-colors">+52 55 1234 5678</a></li>
-            <li><a href="mailto:contacto@nuvisoluciones.com" class="hover:text-nuvi-light transition-colors">contacto@nuvisoluciones.com</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-nuvi-light/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-xs font-light text-nuvi-beige">&copy; 2024 NUVI Engineering. Todos los derechos reservados.</p>
-        <div class="flex space-x-6 text-sm text-nuvi-beige">
-          <a href="#" class="hover:text-nuvi-white transition-colors">LinkedIn</a>
-          <a href="#" class="hover:text-nuvi-white transition-colors">Instagram</a>
+          <div class="hero-stat-val">3</div>
+          <div class="hero-stat-lbl">Líneas de servicio</div>
         </div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="nosotros">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <span class="about-ph-label">about.jpg</span>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-n">+12</div>
+          <div class="about-badge-l">Años de<br>experiencia</div>
+        </div>
+      </div>
+      <div class="about-text reveal d2">
+        <span class="eyebrow">Quiénes somos</span>
+        <h2 class="section-title">Ingeniería técnica con <span>enfoque integral</span></h2>
+        <p class="section-sub">NUVI es una empresa especializada en el mantenimiento civil y electromecánico de instalaciones comerciales, industriales e institucionales. Operamos con un modelo técnico que combina planificación preventiva, respuesta correctiva oportuna y ejecución certificada.</p>
+        <p class="section-sub" style="margin-top:1rem;margin-bottom:2rem;">Desde sistemas eléctricos, HVAC y bombeo hasta infraestructura civil e hidrosanitaria, somos el aliado técnico de empresas que necesitan continuidad operativa y control de riesgos.</p>
+        <div class="about-pills">
+          <div class="about-pill">
+            <div class="about-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <span class="about-pill-text">Mantenimiento preventivo y correctivo</span>
+          </div>
+          <div class="about-pill">
+            <div class="about-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+            <span class="about-pill-text">Respuesta técnica especializada</span>
+          </div>
+          <div class="about-pill">
+            <div class="about-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+            <span class="about-pill-text">Gestión integral de facilidades</span>
+          </div>
+          <div class="about-pill">
+            <div class="about-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <span class="about-pill-text">Continuidad y confiabilidad operativa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section id="servicios">
+  <div class="container">
+    <div class="services-head reveal">
+      <span class="eyebrow eyebrow-center">Nuestros servicios</span>
+      <h2 class="section-title">Tres líneas de servicio.<br>Una sola empresa.</h2>
+      <p class="section-sub">Atendemos de forma integral la infraestructura técnica de tu operación, desde los sistemas electromecánicos hasta la obra civil y la gestión de facilidades.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal d1">
+        <div class="svc-card-top">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+          <span class="svc-cat-tag">Categoría A</span>
+          <h3 class="svc-card-title">Mantenimiento Electromecánico</h3>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Sistemas de Generación Eléctrica — plantas, tableros y distribución</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Climatización y Refrigeración — HVAC, fan coils y chiller</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Sistemas de Bombeo y Motores — hidroneumáticos y sumidero</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Infraestructura Eléctrica — cableado, subestaciones y centros de carga</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Sistemas Contra Incendios — detección, supresión y mantenimiento</span></li>
+        </ul>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-card-top">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <span class="svc-cat-tag">Categoría B</span>
+          <h3 class="svc-card-title">Mantenimiento Civil</h3>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Impermeabilización — azoteas, muros, sótanos y fachadas</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Plomería e Instalaciones Hidrosanitarias — agua y drenaje</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Pintura y Terminaciones — interiores, exteriores y recubrimientos</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Estructuras Ligeras y Remodelaciones — adecuaciones de espacio</span></li>
+        </ul>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-card-top">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+          <span class="svc-cat-tag">Categoría C</span>
+          <h3 class="svc-card-title">Gestión de Facilidades</h3>
+        </div>
+        <ul class="svc-list">
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Igualas de Mantenimiento Integral — contratos preventivos anuales</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Iluminación Integral — LED, control y eficiencia luminotécnica</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Sistemas de Seguridad y Control de Acceso — CCTV y biométricos</span></li>
+          <li class="svc-item"><div class="svc-dot"></div><span class="svc-item-txt">Auditorías y Eficiencia Energética — diagnóstico y optimización</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics-band">
+  <div class="container">
+    <div class="metrics-row">
+      <div class="reveal"><div class="metric-val">+200</div><div class="metric-lbl">Servicios ejecutados</div></div>
+      <div class="reveal d1"><div class="metric-val">+50</div><div class="metric-lbl">Clientes activos</div></div>
+      <div class="reveal d2"><div class="metric-val">12<sup>+</sup></div><div class="metric-lbl">Años en operación</div></div>
+      <div class="reveal d3"><div class="metric-val">3</div><div class="metric-lbl">Líneas de servicio</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CATALOG
+     ============================================================ -->
+<section id="catalogo">
+  <div class="container">
+    <div class="catalog-head reveal">
+      <span class="eyebrow eyebrow-center">Catálogo de servicios</span>
+      <h2 class="section-title">Encuentra el servicio<br>que necesitas</h2>
+      <p class="section-sub">Explora nuestro catálogo completo y solicita información directamente por WhatsApp. Respondemos en menos de 2 horas en días hábiles.</p>
+    </div>
+    <div class="catalog-filters reveal">
+      <button class="filter-btn active" data-filter="all">Todos los servicios</button>
+      <button class="filter-btn" data-filter="electro">Electromecánico</button>
+      <button class="filter-btn" data-filter="civil">Civil</button>
+      <button class="filter-btn" data-filter="facility">Facilidades</button>
+    </div>
+    <div class="catalog-grid" id="catalogGrid">
+      <!-- Cards se insertan por JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTORS
+     ============================================================ -->
+<section id="sectores">
+  <div class="container">
+    <div class="sectors-head reveal">
+      <span class="eyebrow eyebrow-center">Sectores que atendemos</span>
+      <h2 class="section-title">Infraestructuras que operamos</h2>
+      <p class="section-sub">Trabajamos con clientes que comparten la necesidad de operar con continuidad técnica, seguridad y control de sus instalaciones.</p>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-card reveal d1">
+        <div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M6 6h12v4H6zM6 14h4v6H6zM14 14h4v6h-4z"/></svg></div>
+        <div class="sector-name">Edificios Corporativos</div><div class="sector-desc">Oficinas y torres empresariales</div>
+      </div>
+      <div class="sector-card reveal d2">
+        <div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M9 22V12h6v10"/></svg></div>
+        <div class="sector-name">Plazas Comerciales</div><div class="sector-desc">Centros y locales comerciales</div>
+      </div>
+      <div class="sector-card reveal d3">
+        <div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="6" width="20" height="16" rx="1"/><path d="M12 6V2M6 6V4M18 6V4M2 12h20M7 12v6M12 12v6M17 12v6"/></svg></div>
+        <div class="sector-name">Industrias y Plantas</div><div class="sector-desc">Naves y plantas de producción</div>
+      </div>
+      <div class="sector-card reveal d4">
+        <div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 22V8l9-6 9 6v14"/><path d="M6 22V14h12v8"/><rect x="9" y="10" width="2" height="2"/><rect x="13" y="10" width="2" height="2"/></svg></div>
+        <div class="sector-name">Hoteles y Hospitalidad</div><div class="sector-desc">Hoteles, resorts y restaurantes</div>
+      </div>
+      <div class="sector-card reveal d1">
+        <div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="sector-name">Hospitales y Clínicas</div><div class="sector-desc">Infraestructura médica crítica</div>
+      </div>
+      <div class="sector-card reveal d2">
+        <div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 22V10l9-8 9 8v12"/><path d="M10 22v-6h4v6"/></svg></div>
+        <div class="sector-name">Residenciales</div><div class="sector-desc">Condominios y fraccionamientos</div>
+      </div>
+      <div class="sector-card reveal d3">
+        <div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
+        <div class="sector-name">Instituciones</div><div class="sector-desc">Escuelas, universidades y gobierno</div>
+      </div>
+      <div class="sector-card reveal d4">
+        <div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="sector-name">Infraestructura Técnica</div><div class="sector-desc">Centros de datos y subestaciones</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BENEFITS
+     ============================================================ -->
+<section id="beneficios">
+  <div class="benefits-pattern"></div>
+  <div class="container benefits-inner">
+    <div class="benefits-header reveal">
+      <span class="eyebrow">Por qué elegirnos</span>
+      <h2 class="section-title">Lo que diferencia a NUVI</h2>
+      <p class="section-sub">Un modelo técnico orientado a la operación confiable de tus instalaciones, no solo a la atención de fallas cuando ya ocurrieron.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal d1">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+        <h4 class="benefit-title">Respuesta técnica rápida</h4>
+        <p class="benefit-text">Equipo disponible con tiempos de respuesta definidos para atender urgencias operativas sin afectar la continuidad de tu negocio.</p>
+      </div>
+      <div class="benefit-card reveal d2">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4 class="benefit-title">Reducción de riesgos técnicos</h4>
+        <p class="benefit-text">La detección temprana y el mantenimiento preventivo minimizan fallas críticas que generan costos de emergencia y pérdidas operativas.</p>
+      </div>
+      <div class="benefit-card reveal d3">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <h4 class="benefit-title">Eficiencia energética</h4>
+        <p class="benefit-text">Optimizamos sistemas eléctricos, HVAC e iluminación para reducir costos energéticos y extender la vida útil de los equipos.</p>
+      </div>
+      <div class="benefit-card reveal d1">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+        <h4 class="benefit-title">Solución integral en una empresa</h4>
+        <p class="benefit-text">Civil, electromecánico y facility management en un solo proveedor. Menos coordinación, mayor control y gestión unificada.</p>
+      </div>
+      <div class="benefit-card reveal d2">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <h4 class="benefit-title">Mantenimiento programado</h4>
+        <p class="benefit-text">Planes de igualas y programas preventivos anuales que garantizan el estado técnico de tus instalaciones sin sobrecostos.</p>
+      </div>
+      <div class="benefit-card reveal d3">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h4 class="benefit-title">Equipo técnico especializado</h4>
+        <p class="benefit-text">Técnicos con experiencia en instalaciones industriales, comerciales y corporativas, respaldados por supervisión de ingeniería.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESS
+     ============================================================ -->
+<section id="proceso">
+  <div class="container">
+    <div class="process-head reveal">
+      <span class="eyebrow eyebrow-center">Cómo trabajamos</span>
+      <h2 class="section-title">Un proceso técnico <span>claro y trazable</span></h2>
+      <p class="section-sub">Cada intervención sigue un protocolo definido que garantiza diagnóstico preciso, ejecución controlada y seguimiento documentado.</p>
+    </div>
+    <div class="process-track">
+      <div class="process-step reveal d1"><div class="process-n">01</div><div><div class="process-step-title">Diagnóstico</div><div class="process-step-desc">Evaluación técnica del estado real de los sistemas.</div></div></div>
+      <div class="process-step reveal d2"><div class="process-n">02</div><div><div class="process-step-title">Evaluación</div><div class="process-step-desc">Análisis de riesgos, prioridades y requerimientos.</div></div></div>
+      <div class="process-step reveal d3"><div class="process-n">03</div><div><div class="process-step-title">Propuesta</div><div class="process-step-desc">Solución técnica con alcance y presupuesto detallado.</div></div></div>
+      <div class="process-step reveal d4"><div class="process-n">04</div><div><div class="process-step-title">Ejecución</div><div class="process-step-desc">Intervención con personal especializado y supervisión.</div></div></div>
+      <div class="process-step reveal d5"><div class="process-n">05</div><div><div class="process-step-title">Entrega</div><div class="process-step-desc">Pruebas de funcionamiento y documentación técnica.</div></div></div>
+      <div class="process-step reveal d5"><div class="process-n">06</div><div><div class="process-step-title">Seguimiento</div><div class="process-step-desc">Monitoreo post-servicio y programación preventiva.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS
+     ============================================================ -->
+<section id="proyectos" style="background:var(--white)">
+  <div class="container">
+    <div class="projects-header reveal">
+      <div>
+        <span class="eyebrow">Experiencia y proyectos</span>
+        <h2 class="section-title" style="margin-bottom:0">Trabajos ejecutados</h2>
+      </div>
+      <a href="#cta-section" class="btn btn-outline-dark" style="flex-shrink:0">
+        Solicitar cotización
+        <svg class="btn-arrow-r" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="projects-grid">
+      <div class="proj-card reveal d1">
+        <div class="proj-img"><div class="proj-img-ph elec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="proj-badge">Electromecánico</span></div>
+        <div class="proj-body"><div class="proj-title">Sistema HVAC — Torre Corporativa Norte</div><div class="proj-meta">Mantenimiento integral &middot; 2024</div></div>
+      </div>
+      <div class="proj-card reveal d2">
+        <div class="proj-img"><div class="proj-img-ph civil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg></div><span class="proj-badge">Civil</span></div>
+        <div class="proj-body"><div class="proj-title">Impermeabilización — Plaza Comercial Zona Sur</div><div class="proj-meta">Mantenimiento civil &middot; 2024</div></div>
+      </div>
+      <div class="proj-card reveal d3">
+        <div class="proj-img"><div class="proj-img-ph facility"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><span class="proj-badge">Facility</span></div>
+        <div class="proj-body"><div class="proj-title">Iguala anual — Hospital Privado Regional</div><div class="proj-meta">Facility Management &middot; 2023–2024</div></div>
+      </div>
+      <div class="proj-card reveal d4">
+        <div class="proj-img"><div class="proj-img-ph energy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div><span class="proj-badge">Energético</span></div>
+        <div class="proj-body"><div class="proj-title">Auditoría energética — Nave Industrial</div><div class="proj-meta">Eficiencia energética &middot; 2023</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-side reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="section-title">Preguntas<br><span>frecuentes</span></h2>
+        <p class="section-sub">Resolvemos las dudas más comunes sobre nuestros servicios, procesos y cobertura. Si no encuentras lo que buscas, escríbenos directo.</p>
+        <a href="https://wa.me/528299106423?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20sus%20servicios%20de%20mantenimiento." target="_blank" class="faq-contact-hint">
+          <div class="faq-ch-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          </div>
+          <div class="faq-ch-text">
+            <strong>¿Tienes otra pregunta?</strong>
+            <span>Escríbenos por WhatsApp ahora</span>
+          </div>
+        </a>
+      </div>
+      <div class="faq-list reveal d2" id="faqList">
+        <!-- FAQ items se insertan por JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section id="cta-section">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="cta-box-pattern"></div>
+      <div class="cta-box-content">
+        <span class="eyebrow cta-box-eyebrow eyebrow-center">¿Listo para comenzar?</span>
+        <h2 class="cta-box-title">Hablemos sobre el mantenimiento técnico de tus instalaciones</h2>
+        <p class="cta-box-text">Evaluamos el estado actual de tu infraestructura y te presentamos una propuesta técnica adaptada a tus necesidades operativas y presupuesto.</p>
+        <div class="cta-actions">
+          <a href="#contacto" class="btn btn-primary">
+            Solicitar evaluación gratuita
+            <svg class="btn-arrow-r" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="https://wa.me/528299106423?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20evaluaci%C3%B3n%20t%C3%A9cnica%20de%20mis%20instalaciones." target="_blank" class="btn btn-ghost">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            WhatsApp directo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="contacto">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="images/logo.png" alt="NUVI" onerror="this.style.display='none'">
+          <div>
+            <div class="footer-brand-name">NUVI</div>
+            <div class="footer-brand-tag">Soluciones civiles y electromecánicas</div>
+          </div>
+        </div>
+        <p class="footer-brand-desc">Empresa especializada en mantenimiento civil y electromecánico orientada a la continuidad, seguridad y eficiencia de tus instalaciones.</p>
+      </div>
+      <div>
+        <span class="footer-col-h">Servicios</span>
+        <ul class="footer-links">
+          <li><a href="#servicios">Mantenimiento Electromecánico</a></li>
+          <li><a href="#servicios">Mantenimiento Civil</a></li>
+          <li><a href="#servicios">Gestión de Facilidades</a></li>
+          <li><a href="#catalogo">Ver catálogo completo</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-h">Empresa</span>
+        <ul class="footer-links">
+          <li><a href="#nosotros">Quiénes somos</a></li>
+          <li><a href="#sectores">Sectores</a></li>
+          <li><a href="#beneficios">Por qué NUVI</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-h">Contacto</span>
+        <div class="footer-contact-row">
+          <div class="footer-c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>
+          <div class="footer-c-text">829 910 6423<br>Lun–Vie 8:00 – 18:00</div>
+        </div>
+        <div class="footer-contact-row">
+          <div class="footer-c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="footer-c-text">contacto@nuvi.com.mx<br>Respuesta en 24 horas</div>
+        </div>
+        <div class="footer-contact-row">
+          <div class="footer-c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="footer-c-text">Ciudad de México, México<br>Cobertura nacional</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 NUVI — Soluciones civiles y electromecánicas. Todos los derechos reservados.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-soc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://wa.me/528299106423" target="_blank" class="footer-soc" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+        <a href="#" class="footer-soc" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     WHATSAPP FLOAT
+     ============================================================ -->
+<div class="wa-float">
+  <div class="wa-tooltip">¡Escríbenos ahora!</div>
+  <a href="https://wa.me/528299106423?text=Hola%20NUVI%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20servicios%20de%20mantenimiento." target="_blank" class="wa-btn" aria-label="Contactar por WhatsApp">
+    <span class="wa-pulse"></span>
+    <span class="wa-pulse"></span>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function () {
+
+  /* ---- Catalog data ---- */
+  var WA = 'https://wa.me/528299106423?text=';
+  var catalog = [
+    { cat:'electro', img:'c-elec',   badge:'Electromecánico', title:'Plantas Eléctricas y Generadores',    desc:'Revisión, prueba de carga y mantenimiento preventivo de generadores de emergencia y tableros.', price:'Desde $3,500 MXN', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Plantas%20El%C3%A9ctricas.', icon:'<path d="M13 10V3L4 14h7v7l9-11h-7z"/>' },
+    { cat:'electro', img:'c-hvac',   badge:'Electromecánico', title:'Climatización y HVAC',               desc:'Mantenimiento integral de sistemas de aire acondicionado, fan coils, chiller y ventilación.', price:'Cotización especial', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20HVAC%20y%20climatizaci%C3%B3n.', icon:'<circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>' },
+    { cat:'electro', img:'c-bomb',   badge:'Electromecánico', title:'Sistemas de Bombeo y Motores',       desc:'Revisión y mantenimiento de bombas hidroneumáticas, sumideros y sistemas de presión constante.', price:'Desde $2,800 MXN', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Sistemas%20de%20Bombeo.', icon:'<path d="M12 22V12M12 12C12 12 8 9 8 6a4 4 0 018 0c0 3-4 6-4 6z"/><path d="M8 22h8"/>' },
+    { cat:'electro', img:'c-elec',   badge:'Electromecánico', title:'Infraestructura Eléctrica',          desc:'Instalación, revisión y mantenimiento de tableros, centros de carga, subestaciones y cableado.', price:'Cotización especial', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Infraestructura%20El%C3%A9ctrica.', icon:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>' },
+    { cat:'electro', img:'c-fire',   badge:'Electromecánico', title:'Sistemas Contra Incendios',          desc:'Mantenimiento de detectores de humo, rociadores automáticos y sistemas de supresión certificados.', price:'Desde $4,200 MXN', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Sistemas%20Contra%20Incendios.', icon:'<path d="M12 2c0 0-6 6-6 12a6 6 0 0012 0c0-6-6-12-6-12z"/>' },
+    { cat:'civil',   img:'c-civil',  badge:'Civil',           title:'Impermeabilización',                 desc:'Aplicación de sistemas impermeabilizantes en azoteas, muros, sótanos, fachadas y cisternas.', price:'Desde $45/m²', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Impermeabilizaci%C3%B3n.', icon:'<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
+    { cat:'civil',   img:'c-plumb',  badge:'Civil',           title:'Plomería e Instalaciones Hidrosanitarias', desc:'Instalación y reparación de redes de agua potable, drenaje, sistema sanitario y cisternas.', price:'Desde $800 MXN', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Plomer%C3%ADa%20e%20Hidrosanitaria.', icon:'<path d="M12 22v-8M12 14c0 0-4-3-4-7a4 4 0 018 0c0 4-4 7-4 7z"/><path d="M8 22h8"/>' },
+    { cat:'civil',   img:'c-paint',  badge:'Civil',           title:'Pintura y Terminaciones',            desc:'Pintura interior, exterior e industrial. Recubrimientos especiales para fachadas y superficies técnicas.', price:'Desde $25/m²', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Pintura%20y%20Terminaciones.', icon:'<path d="M2 16s1-1 3-1 3 2 6 2 3-1 3-1V4s-1 1-3 1-3-2-6-2S2 4 2 4z"/>' },
+    { cat:'civil',   img:'c-struct', badge:'Civil',           title:'Remodelaciones y Estructuras',        desc:'Adecuaciones de espacio, construcción de estructuras ligeras, drywall, plafones y remodelaciones.', price:'Cotización especial', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Remodelaciones.', icon:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>' },
+    { cat:'facility',img:'c-iguala', badge:'Facility',        title:'Igualas de Mantenimiento Integral',  desc:'Contrato preventivo anual que cubre todos los sistemas de tus instalaciones con visitas programadas.', price:'Plan mensual personalizado', msg:'Hola%2C%20me%20interesa%20una%20Iguala%20de%20Mantenimiento.', icon:'<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>' },
+    { cat:'facility',img:'c-light',  badge:'Facility',        title:'Iluminación Integral LED',           desc:'Sustitución y optimización de sistemas de alumbrado interior y exterior con tecnología LED eficiente.', price:'Cotización especial', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Iluminaci%C3%B3n%20LED.', icon:'<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>' },
+    { cat:'facility',img:'c-sec',    badge:'Facility',        title:'Seguridad y Control de Acceso',      desc:'Instalación de sistemas CCTV, cámaras IP, biométricos, alarmas y control de acceso vehicular.', price:'Desde $8,500 MXN', msg:'Hola%2C%20me%20interesa%20el%20servicio%20de%20Seguridad%20y%20Control%20de%20Acceso.', icon:'<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>' },
+    { cat:'facility',img:'c-audit',  badge:'Facility',        title:'Auditoría y Eficiencia Energética',  desc:'Diagnóstico completo del consumo energético de tu instalación con plan de ahorro y optimización.', price:'Desde $5,000 MXN', msg:'Hola%2C%20me%20interesa%20una%20Auditor%C3%ADa%20Energ%C3%A9tica.', icon:'<path d="M18 20V10M12 20V4M6 20v-6"/>' }
+  ];
+
+  /* ---- Render catalog ---- */
+  var grid = document.getElementById('catalogGrid');
+  catalog.forEach(function(s, i) {
+    var card = document.createElement('div');
+    card.className = 'cat-card';
+    card.dataset.cat = s.cat;
+    card.style.transitionDelay = (i % 4 * 0.07) + 's';
+    card.innerHTML =
+      '<div class="cat-card-img ' + s.img + '">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">' + s.icon + '</svg>' +
+        '<span class="cat-badge">' + s.badge + '</span>' +
+      '</div>' +
+      '<div class="cat-card-body">' +
+        '<div class="cat-card-title">' + s.title + '</div>' +
+        '<div class="cat-card-desc">' + s.desc + '</div>' +
+      '</div>' +
+      '<div class="cat-card-foot">' +
+        '<div class="cat-price">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>' +
+          s.price +
+        '</div>' +
+        '<a href="' + WA + s.msg + '" target="_blank" class="btn-wa-card">' +
+          '<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
+          'Solicitar información' +
+        '</a>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+
+  /* ---- Filter logic ---- */
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      document.querySelectorAll('.cat-card').forEach(function(card) {
+        if (f === 'all' || card.dataset.cat === f) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  /* ---- FAQ data ---- */
+  var faqs = [
+    { q:'¿En qué ciudades o zonas tienen cobertura?',
+      a:'Nuestras operaciones se centran en Ciudad de México y área metropolitana, con capacidad de atender proyectos en el interior de la república mediante coordinación previa. Contáctanos para confirmar disponibilidad en tu zona.' },
+    { q:'¿Cuentan con contratos de mantenimiento preventivo?',
+      a:'Sí. Ofrecemos igualas de mantenimiento integral con visitas programadas mensuales, bimestrales o trimestrales según las necesidades de tu instalación. El contrato incluye mano de obra, diagnósticos periódicos y reporte técnico.' },
+    { q:'¿Cuánto tiempo tardan en responder una urgencia?',
+      a:'Para clientes con contrato de iguala, nuestro tiempo de respuesta es de 2 a 4 horas en días hábiles y dentro de las primeras 8 horas en fines de semana. Para servicios correctivos sin contrato previo, coordinamos según disponibilidad.' },
+    { q:'¿Trabajan con empresas grandes o también con negocios medianos?',
+      a:'Atendemos desde negocios medianos hasta grandes corporativos e instalaciones industriales. Nuestros servicios se adaptan al tamaño y complejidad de cada instalación. Evaluamos cada caso sin compromiso.' },
+    { q:'¿El personal técnico está certificado?',
+      a:'Sí. Nuestros técnicos cuentan con formación especializada en sus áreas: electricidad, HVAC, plomería, sistemas contra incendios y control de acceso. Trabajamos bajo normativa NOM vigente y con equipos de protección personal.' },
+    { q:'¿Cómo es el proceso para contratar un servicio?',
+      a:'Es simple: contáctanos por WhatsApp o formulario → agendamos una visita de diagnóstico sin costo → te presentamos una propuesta técnica detallada → acordamos inicio de trabajo. Sin burocracia innecesaria.' },
+    { q:'¿Ofrecen garantía en sus trabajos?',
+      a:'Sí. Todos nuestros servicios tienen garantía técnica. El periodo varía según el tipo de trabajo: desde 30 días para servicios correctivos menores hasta 12 meses en instalaciones y obras. Los detalles se especifican en cada contrato.' },
+    { q:'¿Qué incluye una auditoría energética?',
+      a:'Incluye inspección de todos los sistemas consumidores de energía (HVAC, iluminación, motores, generadores), medición real de consumo, identificación de pérdidas y un plan de acción con estimación de ahorro económico mensual.' }
+  ];
+
+  var faqList = document.getElementById('faqList');
+  faqs.forEach(function(f) {
+    var item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML =
+      '<div class="faq-q">' +
+        '<span>' + f.q + '</span>' +
+        '<div class="faq-icon">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+        '</div>' +
+      '</div>' +
+      '<div class="faq-a"><div class="faq-a-inner">' + f.a + '</div></div>';
+    item.querySelector('.faq-q').addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+    faqList.appendChild(item);
+  });
+
+  /* ---- Navbar scroll ---- */
+  var header = document.getElementById('header');
+  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- Mobile menu ---- */
+  var hamburger = document.getElementById('hamburger');
+  var drawer    = document.getElementById('drawer');
+  function closeDrawer() {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', function() {
+    var open = drawer.classList.contains('open');
+    if (open) { closeDrawer(); }
+    else {
+      hamburger.classList.add('open');
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeDrawer); });
+  window.addEventListener('resize', function(){ if (window.innerWidth > 768) closeDrawer(); });
+
+  /* ---- Scroll reveal ---- */
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .cat-card').forEach(function(el){ io.observe(el); });
+
+})();
+</script>
+
 </body>
 </html>
