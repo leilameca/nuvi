@@ -1089,12 +1089,14 @@ body.catalog-open .wa-float { opacity: 0; pointer-events: none; }
 }
 @media (max-width: 768px) {
   :root { --nav-h: 72px; }
-  #header .container { padding-left: 1rem; padding-right: 1rem; }
-  .nav-inner { justify-content: flex-start; gap: 0.5rem; }
+  #header .container { padding-left: 1rem; padding-right: 0.35rem; }
+  .nav-inner { justify-content: space-between; gap: 0.5rem; }
+  .nav-logo { margin-right: 0; }
   .nav-links, .btn-nav { display: none; }
   .nav-hamburger {
     display: flex;
-    margin-left: auto;
+    margin-left: 0;
+    margin-right: -0.12rem;
     flex: 0 0 44px;
     width: 44px;
     align-items: center;
@@ -1200,9 +1202,9 @@ body.catalog-open .wa-float { opacity: 0; pointer-events: none; }
   :root { --nav-h: 68px; }
   section { padding: 68px 0; }
   .container { padding: 0 1rem; }
-  #header .container { padding-left: 1rem; padding-right: 1rem; }
-  .nav-inner { gap: 0.35rem; }
-  .nav-hamburger { flex-basis: 40px; width: 40px; }
+  #header .container { padding-left: 1rem; padding-right: 0.15rem; }
+  .nav-inner { justify-content: space-between; gap: 0.35rem; }
+  .nav-hamburger { flex-basis: 40px; width: 40px; margin-right: -0.18rem; }
   .nav-drawer {
     width: min(320px, 88vw);
     padding: 5.8rem 1.1rem 1.5rem;
@@ -1375,4 +1377,3 @@ body.catalog-open .wa-float { opacity: 0; pointer-events: none; }
 
 /* Mobile tap feedback */
 button, a { -webkit-tap-highlight-color: transparent; }
-
