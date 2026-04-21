@@ -1089,7 +1089,7 @@ body.catalog-open .wa-float { opacity: 0; pointer-events: none; }
 }
 @media (max-width: 768px) {
   :root { --nav-h: 72px; }
-  #header .container { padding-left: 1rem; padding-right: 0.02rem; }
+  #header .container { padding-left: 1rem; padding-right: 1rem; }
   .nav-inner { gap: 0.5rem; }
   .nav-logo { margin-right: auto; }
   .nav-links, .btn-nav { display: none; }
@@ -1098,10 +1098,9 @@ body.catalog-open .wa-float { opacity: 0; pointer-events: none; }
     margin-left: auto;
     flex: 0 0 44px;
     width: 44px;
-    align-items: flex-end;
-    transform: translateX(5.2rem);
+    align-items: center;
   }
-  .nav-hamburger:hover { opacity: 0.76; transform: translateX(5.2rem); }
+  .nav-hamburger:hover { opacity: 0.76; }
   .nav-menu-backdrop { display: block; }
   .nav-drawer { display: flex; }
   section { padding: 80px 0; }
@@ -1201,13 +1200,11 @@ body.catalog-open .wa-float { opacity: 0; pointer-events: none; }
   :root { --nav-h: 68px; }
   section { padding: 68px 0; }
   .container { padding: 0 1rem; }
-  #header .container { padding-left: 1rem; padding-right: 0; }
+  #header .container { padding-left: 1rem; padding-right: 1rem; }
   .nav-inner { gap: 0.35rem; }
   .nav-hamburger {
     flex-basis: 40px; width: 40px;
-    transform: translateX(5.9rem);
   }
-  .nav-hamburger:hover { transform: translateX(5.9rem); }
   .nav-drawer {
     width: min(320px, 88vw);
     padding: 5.8rem 1.1rem 1.5rem;
