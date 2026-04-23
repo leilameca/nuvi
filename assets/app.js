@@ -121,8 +121,12 @@
     var label = f === 'all' ? 'Mostrando todos los servicios' :
                 f === 'electro' ? 'Electromecánico' :
                 f === 'civil'   ? 'Civil' : 'Facilidades';
-    catalogCount.textContent = visible + ' ' + (visible === 1 ? 'servicio' : 'servicios') +
-      (f !== 'all' ? ' — ' + label : '');
+    catalogCount.style.opacity = '0';
+    setTimeout(function() {
+      catalogCount.textContent = visible + ' ' + (visible === 1 ? 'servicio' : 'servicios') +
+        (f !== 'all' ? ' — ' + label : '');
+      catalogCount.style.opacity = '1';
+    }, 100);
   }
 
   var filterBtns = document.querySelectorAll('.filter-btn');
@@ -130,6 +134,7 @@
     btn.addEventListener('click', function() {
       filterBtns.forEach(function(b){ b.classList.remove('active'); });
       btn.classList.add('active');
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       var f = btn.dataset.filter;
       var cards = document.querySelectorAll('.cat-card');
       cards.forEach(function(card) { card.classList.add('filtering'); });
@@ -281,6 +286,16 @@
   catalogModalNext.addEventListener('click', function() {
     setCatalogSlide(activeCatalogSlideIndex + 1);
   });
+
+  var swipeTouchStartX = 0;
+  catalogModalStage.addEventListener('touchstart', function(e) {
+    swipeTouchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+  catalogModalStage.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - swipeTouchStartX;
+    if (Math.abs(dx) < 40) return;
+    setCatalogSlide(dx < 0 ? activeCatalogSlideIndex + 1 : activeCatalogSlideIndex - 1);
+  }, { passive: true });
   catalogModalThumbs.addEventListener('click', function(e) {
     var thumb = e.target.closest('.catalog-modal-thumb');
     if (!thumb) return;
