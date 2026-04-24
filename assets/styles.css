@@ -1412,6 +1412,14 @@ body.catalog-open .wa-float { opacity: 0; pointer-events: none; }
 }
 .form-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none !important; }
 .form-note { font-size: 0.74rem; color: var(--text-3); text-align: center; margin-top: 0.875rem; }
+.form-error {
+  display: none; margin-top: 1rem;
+  padding: 0.875rem 1rem; background: #FDECEC;
+  color: #9B1C1C; border-radius: var(--r);
+  font-size: 0.83rem; font-weight: 600; text-align: center;
+  border: 1px solid #F7B5B5;
+}
+.form-error.show { display: block; }
 .form-success {
   display: none; margin-top: 1.25rem;
   padding: 1rem 1.5rem; background: #EDF7ED;

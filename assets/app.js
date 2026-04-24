@@ -494,22 +494,56 @@
   });
 
   /* ---- Contact form → Google Sheets ---- */
-  var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwA48ZW7EHWgl4u1VOaHr-PIInljJu6LoQMJHY7O6VRMgvZfY058cJ_Y_Zyav1RohL0/exec';
+  var DEFAULT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwms0sCLap_g-iVVYI31kvIVLulHSoXZM4BuQ65dHFQfTjTU2Si5Sn_eCn_aohrPIMY/exec';
+  var DEFAULT_NOTIFY_EMAIL = 'angel.nunez@nuvird.com';
 
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
+    var sheetsUrl = (contactForm.getAttribute('data-sheets-url') || DEFAULT_SHEETS_URL).trim();
+    var notifyEmail = (contactForm.getAttribute('data-notify-email') || DEFAULT_NOTIFY_EMAIL).trim();
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
       var btn     = document.getElementById('formBtn');
       var btnText = document.getElementById('formBtnText');
       var success = document.getElementById('formSuccess');
+      var error   = document.getElementById('formError');
+
+      if (success) success.classList.remove('show');
+      if (error) {
+        error.classList.remove('show');
+        error.textContent = '';
+      }
 
       /* Basic validation */
       var nombre   = contactForm.querySelector('[name="nombre"]').value.trim();
       var telefono = contactForm.querySelector('[name="telefono"]').value.trim();
       var email    = contactForm.querySelector('[name="email"]').value.trim();
+      var isEmailValid = /\S+@\S+\.\S+/.test(email);
       if (!nombre || !telefono || !email) {
-        alert('Por favor completa los campos obligatorios (*).');
+        if (error) {
+          error.textContent = 'Completa los campos obligatorios (*).';
+          error.classList.add('show');
+        } else {
+          alert('Por favor completa los campos obligatorios (*).');
+        }
+        return;
+      }
+      if (!isEmailValid) {
+        if (error) {
+          error.textContent = 'Ingresa un correo valido.';
+          error.classList.add('show');
+        } else {
+          alert('Ingresa un correo valido.');
+        }
+        return;
+      }
+      if (!sheetsUrl) {
+        if (error) {
+          error.textContent = 'No hay endpoint configurado para el formulario.';
+          error.classList.add('show');
+        } else {
+          alert('No hay endpoint configurado para el formulario.');
+        }
         return;
       }
 
@@ -522,25 +556,50 @@
         telefono: telefono,
         email:    email,
         tipo:     contactForm.querySelector('[name="tipo"]').value,
-        mensaje:  contactForm.querySelector('[name="mensaje"]').value.trim()
+        mensaje:  contactForm.querySelector('[name="mensaje"]').value.trim(),
+        source:   'Web NUVI',
+        page:     window.location.href,
+        submittedAt: new Date().toISOString(),
+        notifyEmail: notifyEmail || DEFAULT_NOTIFY_EMAIL
       };
 
-      fetch(SHEETS_URL, {
+      var params = new URLSearchParams();
+      Object.keys(data).forEach(function(key) {
+        params.append(key, data[key] || '');
+      });
+
+      console.info('[NUVI Form] Enviando lead a Apps Script', {
+        endpoint: sheetsUrl,
+        notifyEmail: data.notifyEmail
+      });
+
+      fetch(sheetsUrl, {
         method: 'POST',
         mode:   'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(data)
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: params.toString()
       })
       .then(function() {
-        success.classList.add('show');
+        if (success) {
+          success.textContent = 'Mensaje enviado. Si no recibes respuesta en 24 horas, escribenos por WhatsApp.';
+          success.classList.add('show');
+        }
         contactForm.reset();
         btnText.textContent = 'Enviar solicitud';
         btn.disabled = false;
-        setTimeout(function() { success.classList.remove('show'); }, 6000);
+        setTimeout(function() {
+          if (success) success.classList.remove('show');
+        }, 7000);
       })
-      .catch(function() {
+      .catch(function(err) {
+        console.error('[NUVI Form] Error enviando formulario', err);
         btnText.textContent = 'Enviar solicitud';
         btn.disabled = false;
+        if (error) {
+          error.textContent = 'No se pudo enviar en este momento. Escribenos por WhatsApp al 829 910 6423.';
+          error.classList.add('show');
+          return;
+        }
         alert('Hubo un error. Escríbenos directo por WhatsApp.');
       });
     });
