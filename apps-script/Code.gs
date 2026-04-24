@@ -2,6 +2,16 @@ const DEFAULT_SHEET_NAME = 'Leads';
 const DEFAULT_NOTIFY_EMAIL = 'angel.nunez@nuvird.com';
 const DEFAULT_SOURCE = 'Web NUVI';
 
+function authorizeProject() {
+  const ssId = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
+  if (!ssId) {
+    throw new Error('Configura SPREADSHEET_ID en Script Properties antes de autorizar.');
+  }
+  SpreadsheetApp.openById(ssId).getName();
+  MailApp.getRemainingDailyQuota();
+  return 'Autorizacion completada';
+}
+
 function doGet() {
   return asJson_({
     ok: true,

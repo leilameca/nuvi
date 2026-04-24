@@ -494,7 +494,7 @@
   });
 
   /* ---- Contact form → Google Sheets ---- */
-  var DEFAULT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwms0sCLap_g-iVVYI31kvIVLulHSoXZM4BuQ65dHFQfTjTU2Si5Sn_eCn_aohrPIMY/exec';
+  var DEFAULT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyoIIqfIT4SFK-eZxCaVJ2Y2JL8-1jlB4Ndfc1uHmQa3Q1OU3v8Yz-qxq-RTW1IAkUd/exec';
   var DEFAULT_NOTIFY_EMAIL = 'angel.nunez@nuvird.com';
 
   var contactForm = document.getElementById('contactForm');

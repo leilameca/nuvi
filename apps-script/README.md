@@ -18,6 +18,8 @@ En Apps Script, ve a `Project Settings` -> `Script Properties` y crea:
 - `SPREADSHEET_ID`: ID del Google Sheet donde guardaras leads.
 - `SHEET_NAME`: (opcional) por defecto usa `Leads`.
 
+Luego ejecuta manualmente la funcion `authorizeProject` una vez desde el editor de Apps Script y acepta permisos.
+
 ## 3) Desplegar como Web App
 
 1. `Deploy` -> `New deployment`.
@@ -45,3 +47,5 @@ Solo reemplaza `data-sheets-url` por la nueva URL de tu despliegue.
 
 Si el endpoint devuelve `403 Forbidden`, casi siempre es por permisos del despliegue.
 Revisa que el Web App este publicado como **Anyone** y vuelve a desplegar.
+
+Si devuelve `401 Unauthorized`, normalmente falta autorizar el proyecto o el despliegue no es publico para POST.
