@@ -20,25 +20,44 @@ function doGet() {
   });
 }
 
+function debugDestination() {
+  const sheet = getLeadsSheet_();
+  return {
+    spreadsheetId: sheet.getParent().getId(),
+    spreadsheetName: sheet.getParent().getName(),
+    sheetName: sheet.getName(),
+    lastRow: sheet.getLastRow()
+  };
+}
+
 function doPost(e) {
+  let payload = null;
   try {
-    const payload = normalizePayload_(e);
+    payload = normalizePayload_(e);
     validatePayload_(payload);
 
     const rowNumber = appendLeadRow_(payload);
     sendLeadEmail_(payload);
 
-    return asJson_({
+    const response = {
       ok: true,
       row: rowNumber,
       message: 'Lead registrado correctamente'
-    });
+    };
+
+    return shouldRespondWithIframe_(payload)
+      ? asIframeMessage_(payload, response)
+      : asJson_(response);
   } catch (err) {
     console.error('[NUVI Script] Error procesando lead: ' + err);
-    return asJson_({
+    const response = {
       ok: false,
       error: String(err)
-    });
+    };
+
+    return shouldRespondWithIframe_(payload)
+      ? asIframeMessage_(payload, response)
+      : asJson_(response);
   }
 }
 
@@ -53,7 +72,9 @@ function normalizePayload_(e) {
     mensaje: (p.mensaje || '').trim(),
     source: (p.source || DEFAULT_SOURCE).trim(),
     page: (p.page || '').trim(),
-    notifyEmail: (p.notifyEmail || DEFAULT_NOTIFY_EMAIL).trim()
+    notifyEmail: (p.notifyEmail || DEFAULT_NOTIFY_EMAIL).trim(),
+    parentOrigin: (p.parentOrigin || '').trim(),
+    responseMode: (p.responseMode || '').trim()
   };
 }
 
@@ -104,6 +125,20 @@ function sendLeadEmail_(payload) {
   if (!to) return;
 
   const subject = 'Nuevo lead web NUVI: ' + payload.nombre;
+  const plainBody = [
+    'Nuevo lead desde el sitio web',
+    '',
+    'Nombre: ' + payload.nombre,
+    'Telefono: ' + payload.telefono,
+    'Email: ' + payload.email,
+    'Servicio: ' + (payload.tipo || 'No especificado'),
+    'Mensaje: ' + (payload.mensaje || 'Sin mensaje'),
+    '',
+    'Origen: ' + payload.source,
+    'Pagina: ' + (payload.page || 'N/D'),
+    'Fecha: ' + payload.submittedAt
+  ].join('\n');
+
   const htmlBody = [
     '<h2>Nuevo lead desde el sitio web</h2>',
     '<p><strong>Nombre:</strong> ' + escapeHtml_(payload.nombre) + '</p>',
@@ -120,6 +155,7 @@ function sendLeadEmail_(payload) {
   MailApp.sendEmail({
     to: to,
     subject: subject,
+    body: plainBody,
     htmlBody: htmlBody
   });
 }
@@ -128,6 +164,54 @@ function asJson_(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function shouldRespondWithIframe_(payload) {
+  return !!(payload && (payload.responseMode === 'iframe' || payload.parentOrigin));
+}
+
+function asIframeMessage_(payload, response) {
+  const targetOrigin = sanitizeOrigin_(payload && payload.parentOrigin);
+  const message = {
+    source: 'nuvi-leads-endpoint',
+    ok: !!(response && response.ok),
+    row: response && response.row ? response.row : null,
+    message: response && response.message ? response.message : '',
+    error: response && response.error ? response.error : ''
+  };
+
+  const html = [
+    '<!doctype html>',
+    '<html><head><meta charset="utf-8"></head><body>',
+    '<script>',
+    '(function(){',
+    'var message=' + serializeForScript_(message) + ';',
+    'var targetOrigin=' + serializeForScript_(targetOrigin) + ';',
+    'try {',
+    '  if (window.parent && window.parent !== window) {',
+    '    window.parent.postMessage(message, targetOrigin || "*");',
+    '  }',
+    '} catch (err) {}',
+    'document.body.textContent = message.ok ? "OK" : "ERROR";',
+    '})();',
+    '<' + '/script>',
+    '</body></html>'
+  ].join('');
+
+  return HtmlService
+    .createHtmlOutput(html)
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function sanitizeOrigin_(origin) {
+  if (!origin) return '*';
+
+  const cleanOrigin = String(origin).trim();
+  return /^https?:\/\/[^/]+$/i.test(cleanOrigin) ? cleanOrigin : '*';
+}
+
+function serializeForScript_(value) {
+  return JSON.stringify(value).replace(/</g, '\\u003c');
 }
 
 function escapeHtml_(input) {
