@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://nuvingenieria.com/</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://nuvingenieria.com/images/hero/nuvi-ingenieria-mantenimiento-facility-management-republica-dominicana.webp</image:loc>
+      <image:title>Nuvi Ingenieria mantenimiento y facility management</image:title>
+      <image:caption>Servicios de ingenieria y mantenimiento para empresas en Republica Dominicana.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://nuvingenieria.com/images/proyectos/cambio-luminarias-torre-universal-santiago-1.webp</image:loc>
+      <image:title>Cambio de luminarias Torre Universal Santiago</image:title>
+      <image:caption>Proyecto de energia e iluminacion ejecutado por Nuvi Ingenieria.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://nuvingenieria.com/images/proyectos/pintado-exterior-seguros-universal-plaza-paseo-puerto-plata-1.webp</image:loc>
+      <image:title>Pintado exterior de oficina Seguros Universal en Plaza Paseo</image:title>
+      <image:caption>Proyecto de obras civiles e infraestructura en Puerto Plata.</image:caption>
+    </image:image>
+  </url>
+</urlset>
