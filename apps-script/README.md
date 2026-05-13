@@ -1,58 +1,167 @@
 # Google Sheets + Correo (Apps Script)
 
-Este archivo explica como dejar operativo el formulario para:
+Esta carpeta ya trae listo el script para que el formulario del sitio haga 2 cosas:
 
-1. Guardar leads en Google Sheets.
-2. Enviar notificacion al correo de la empresa.
+1. Guardar leads en un Google Sheet.
+2. Enviar una notificacion por correo.
 
-## 1) Crear el proyecto de Apps Script
+Si vas a crear un Google Sheet nuevo desde cero, sigue estos pasos.
+
+## 1) Crear el Google Sheet nuevo
+
+1. Entra a [Google Sheets](https://sheets.google.com).
+2. Crea una hoja nueva en blanco.
+3. Ponle un nombre facil de reconocer, por ejemplo: `Leads NUVI`.
+4. Copia el ID del documento desde la URL.
+
+Ejemplo:
+
+```text
+https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz1234567890/edit#gid=0
+```
+
+En ese ejemplo, el `SPREADSHEET_ID` es:
+
+```text
+1AbCdEfGhIjKlMnOpQrStUvWxYz1234567890
+```
+
+No necesitas crear las columnas manualmente. El script las crea solo la primera vez si la hoja `Leads` no existe.
+
+## 2) Crear el proyecto de Apps Script
 
 1. Abre [script.new](https://script.new).
-2. Copia el contenido de `Code.gs` (en esta misma carpeta).
-3. Guarda el proyecto.
+2. Borra el contenido que trae por defecto.
+3. Abre [Code.gs](/c:/Users/seers/OneDrive/Escritorio/NUVI/apps-script/Code.gs).
+4. Copia todo ese archivo y pegalo en Apps Script.
+5. Guarda el proyecto con un nombre como `NUVI Leads`.
 
-## 2) Configurar propiedades del script
+## 3) Configurar las propiedades del script
 
-En Apps Script, ve a `Project Settings` -> `Script Properties` y crea:
+Dentro de Apps Script:
 
-- `SPREADSHEET_ID`: ID del Google Sheet donde guardaras leads.
-- `SHEET_NAME`: (opcional) por defecto usa `Leads`.
+1. Ve a `Project Settings`.
+2. Busca `Script Properties`.
+3. Crea estas propiedades:
 
-Luego ejecuta manualmente la funcion `authorizeProject` una vez desde el editor de Apps Script y acepta permisos.
-Tambien puedes ejecutar `debugDestination` para confirmar en que spreadsheet y hoja se estan guardando los leads.
+- `SPREADSHEET_ID` = el ID del Google Sheet nuevo
+- `SHEET_NAME` = `Leads`
 
-## 3) Desplegar como Web App
+`SHEET_NAME` es opcional, pero te recomiendo dejarlo como `Leads` para que coincida con el proyecto.
 
-1. `Deploy` -> `New deployment`.
-2. Tipo: `Web app`.
-3. `Execute as`: **Me**.
-4. `Who has access`: **Anyone**.
-5. Deploy y copia la URL terminada en `/exec`.
-6. Si ya tenias un deployment anterior, crea una nueva version y vuelve a desplegar para que tome el `Code.gs` actualizado.
+## 4) Autorizar el proyecto
 
-## 4) Conectar en el frontend
+Antes de publicarlo, hay que darle permisos al script:
 
-En `index.html`, el formulario ya tiene:
+1. En Apps Script, arriba, en el selector de funciones, elige `authorizeProject`.
+2. Haz clic en `Run`.
+3. Google te pedira permisos.
+4. Acepta acceso a:
 
-- `data-sheets-url=".../exec"`
-- `data-notify-email="angel.nunez@nuvird.com"`
+- Google Sheets
+- Gmail / MailApp
 
-Solo reemplaza `data-sheets-url` por la nueva URL de tu despliegue.
+Si quieres confirmar que quedo apuntando al archivo correcto:
 
-El frontend ya no depende de `fetch(..., no-cors)`. Ahora envia el formulario a un `iframe` oculto y espera una confirmacion real con `postMessage` desde Apps Script.
+1. Ejecuta la funcion `debugDestination`.
+2. Revisa el resultado.
+3. Debe mostrar el `spreadsheetId`, el nombre del archivo y la hoja donde se guardaran los leads.
 
-Como compatibilidad, si el deployment activo todavia responde con JSON simple y no con `postMessage`, la web toma la carga correcta del `iframe` como exito para no dejar al usuario bloqueado. Aun asi, lo ideal sigue siendo redeployar el Web App despues de actualizar `Code.gs` para tener confirmacion explicita de exito o error.
+## 5) Desplegar como Web App
 
-## 5) Prueba rapida
+1. Haz clic en `Deploy`.
+2. Elige `New deployment`.
+3. En tipo, selecciona `Web app`.
+4. Configura:
 
-1. Envia un formulario desde el sitio.
-2. Verifica una nueva fila en el sheet.
-3. Verifica correo en `angel.nunez@nuvird.com`.
-4. Si ves el mensaje `No pudimos confirmar el envio`, revisa que la URL del formulario apunte al deployment correcto y que el Web App haya sido redeployado.
+- `Execute as`: `Me`
+- `Who has access`: `Anyone`
 
-## Nota importante sobre errores 403
+5. Haz clic en `Deploy`.
+6. Copia la URL final terminada en `/exec`.
 
-Si el endpoint devuelve `403 Forbidden`, casi siempre es por permisos del despliegue.
-Revisa que el Web App este publicado como **Anyone** y vuelve a desplegar.
+Si luego cambias `Code.gs`, recuerda crear una nueva version y volver a desplegar.
 
-Si devuelve `401 Unauthorized`, normalmente falta autorizar el proyecto o el despliegue no es publico para POST.
+## 6) Conectar el formulario del sitio
+
+En este proyecto, el formulario ya esta preparado. Solo debes cambiar la URL del endpoint en [index.html](/c:/Users/seers/OneDrive/Escritorio/NUVI/index.html).
+
+Busca este atributo:
+
+```html
+data-sheets-url="https://script.google.com/macros/s/.../exec"
+```
+
+Y reemplazalo por la URL nueva de tu deployment.
+
+El correo que recibe la notificacion sale de este otro atributo:
+
+```html
+data-notify-email="angel.nunez@nuvird.com"
+```
+
+Si quieres que el correo llegue a otra direccion, cambialo tambien.
+
+## 7) Que datos se guardan
+
+El formulario envia estos campos:
+
+- `Nombre`
+- `Telefono`
+- `Email`
+- `Servicio`
+- `Mensaje`
+- `Origen`
+- `Pagina`
+- `Fecha`
+
+Si la hoja `Leads` no existe, el script la crea y agrega esos encabezados automaticamente.
+
+## 8) Probar el flujo completo
+
+1. Abre el sitio.
+2. Envia una prueba desde el formulario.
+3. Abre el Google Sheet nuevo.
+4. Confirma que aparecio una fila nueva.
+5. Revisa tambien el correo configurado en `data-notify-email`.
+
+## 9) Errores comunes
+
+### `403 Forbidden`
+
+Casi siempre significa que el Web App no quedo publico.
+
+Verifica:
+
+- `Who has access` = `Anyone`
+- que hayas desplegado una version nueva
+- que el `data-sheets-url` apunte al deployment correcto
+
+### `401 Unauthorized`
+
+Normalmente significa que faltan permisos.
+
+Prueba esto:
+
+1. Ejecuta `authorizeProject` otra vez.
+2. Acepta permisos.
+3. Vuelve a desplegar el Web App.
+
+### No aparece nada en el Sheet
+
+Revisa:
+
+1. que `SPREADSHEET_ID` sea correcto
+2. que el formulario este apuntando al `/exec` correcto
+3. que el deployment publicado sea el mas reciente
+
+## Resumen rapido
+
+1. Crear Google Sheet nuevo.
+2. Copiar `Code.gs` a Apps Script.
+3. Configurar `SPREADSHEET_ID`.
+4. Ejecutar `authorizeProject`.
+5. Desplegar como `Web app`.
+6. Copiar la URL `/exec`.
+7. Reemplazar `data-sheets-url` en `index.html`.
+8. Enviar una prueba y validar la fila en el Sheet.
