@@ -90,14 +90,30 @@
       'images/mantenimiento-breaker-motorizado-nuvi.webp',
       'images/servicios/servicio-electromecanico-nuvi-republica-dominicana.webp'
     ],
+    'Climatizaci\u00F3n y HVAC': [
+      'images/stock-mantenimiento-integral-pexels.webp',
+      'images/servicios/servicio-hvac-nuvi-republica-dominicana.webp'
+    ],
+    'Sistemas de Bombeo y Motores': [
+      'images/stock-sistemas-bombeo-motores-pexels.webp',
+      'images/servicios/servicio-electromecanico-nuvi-republica-dominicana.webp'
+    ],
     'Infraestructura El\u00E9ctrica': [
       'images/diseno-salidas-electricas-ups-redes-nuvi.webp',
       'images/canalizacion-electrica-redes-nuvi.webp',
       'images/mantenimiento-breaker-motorizado-nuvi.webp'
     ],
+    'Sistemas Contra Incendios': [
+      'images/stock-sistema-contra-incendios-pexels.webp',
+      'images/servicios/servicio-electromecanico-nuvi-republica-dominicana.webp'
+    ],
     'Impermeabilizaci\u00F3n': [
-      'images/servicios/servicio-obras-civiles-nuvi-republica-dominicana.webp',
+      'images/impermeabilizacion-plazoleta-torre-universal-poster.webp',
       { src: 'images/impermeabilizacion-plazoleta-torre-universal.mp4', type: 'video', poster: 'images/impermeabilizacion-plazoleta-torre-universal-poster.webp' }
+    ],
+    'Plomer\u00EDa e Instalaciones Hidrosanitarias': [
+      'images/stock-plomeria-instalaciones-pexels.webp',
+      'images/servicios/servicio-obras-civiles-nuvi-republica-dominicana.webp'
     ],
     'Pintura y Terminaciones': [
       'images/pintado-fachada-torre-universal-altura.webp',
@@ -109,12 +125,18 @@
       'images/cortinas-plegables-oficinas-nuvi.webp',
       'images/proyectos/remodelacion-oficina-seguros-universal-union-medica-santiago.webp'
     ],
+    'Igualas de Mantenimiento Integral': [
+      'images/servicios/servicio-facility-management-nuvi-santiago-rd.jpg',
+      'images/equipo/nuvi-supervision-tecnica-operaciones-rd.webp',
+      'images/proyectos/limpieza-parqueo-torre-universal-santiago.webp'
+    ],
     'Iluminaci\u00F3n Integral LED': [
       'images/instalacion-luminarias-led-parqueo-torre-universal.jpeg',
       'images/proyectos/cambio-luminarias-torre-universal-santiago-1.webp',
       'images/proyectos/cambio-luminarias-torre-universal-santiago-2.webp'
     ],
     'Seguridad y Control de Acceso': [
+      'images/stock-seguridad-control-acceso-pexels.webp',
       'images/reparacion-shutters-nuvi.webp',
       'images/servicios/servicio-facility-management-nuvi-santiago-rd.jpg'
     ],
@@ -179,16 +201,28 @@
     });
   }
 
+  function getCatalogCover(service) {
+    var gallery = getCatalogGallery(service);
+    if (!gallery.length) return { src: 'images/hero-bg.webp', alt: service.title };
+    var first = gallery[0];
+    return {
+      src: first.type === 'video' && first.poster ? first.poster : first.src,
+      alt: 'Imagen del servicio de ' + service.title
+    };
+  }
+
   /* ---- Render catalog ---- */
   var grid = document.getElementById('catalogGrid');
   catalog.forEach(function(s, i) {
+    var cover = getCatalogCover(s);
     var card = document.createElement('div');
     card.className = 'cat-card';
     card.dataset.cat = s.cat;
     card.style.transitionDelay = (i % 4 * 0.07) + 's';
     card.innerHTML =
       '<div class="cat-card-img ' + s.img + '">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">' + s.icon + '</svg>' +
+        '<img class="cat-card-cover" src="' + cover.src + '" alt="' + cover.alt + '" loading="lazy" decoding="async" onerror="this.remove();this.parentNode.classList.add(\'cover-missing\')">' +
+        '<svg class="cat-card-fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">' + s.icon + '</svg>' +
         '<span class="cat-badge">' + s.badge + '</span>' +
       '</div>' +
       '<div class="cat-card-body">' +
