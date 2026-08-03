@@ -83,6 +83,47 @@
     facility: ['images/servicios/servicio-facility-management-nuvi-santiago-rd.jpg', 'images/proyectos/limpieza-parqueo-torre-universal-santiago.webp', 'images/proyectos/poda-arboles-plaza-paseo-puerto-plata-1.webp']
   };
 
+  /* Evidencias reales asignadas al servicio al que pertenecen. Los servicios sin
+     material propio conservan la galeria visual de su categoria. */
+  var catalogGalleryByTitle = {
+    'Plantas El\u00E9ctricas y Generadores': [
+      'images/mantenimiento-breaker-motorizado-nuvi.webp',
+      'images/servicios/servicio-electromecanico-nuvi-republica-dominicana.webp'
+    ],
+    'Infraestructura El\u00E9ctrica': [
+      'images/diseno-salidas-electricas-ups-redes-nuvi.webp',
+      'images/canalizacion-electrica-redes-nuvi.webp',
+      'images/mantenimiento-breaker-motorizado-nuvi.webp'
+    ],
+    'Impermeabilizaci\u00F3n': [
+      'images/servicios/servicio-obras-civiles-nuvi-republica-dominicana.webp',
+      { src: 'images/impermeabilizacion-plazoleta-torre-universal.mp4', type: 'video', poster: 'images/impermeabilizacion-plazoleta-torre-universal-poster.webp' }
+    ],
+    'Pintura y Terminaciones': [
+      'images/pintado-fachada-torre-universal-altura.webp',
+      { src: 'images/pintado-fachada-torre-universal-altura.mp4', type: 'video', poster: 'images/pintado-fachada-torre-universal-altura-poster.webp' },
+      'images/proyectos/pintado-exterior-seguros-universal-plaza-paseo-puerto-plata-1.webp'
+    ],
+    'Remodelaciones y Estructuras': [
+      'images/reparacion-shutters-nuvi.webp',
+      'images/cortinas-plegables-oficinas-nuvi.webp',
+      'images/proyectos/remodelacion-oficina-seguros-universal-union-medica-santiago.webp'
+    ],
+    'Iluminaci\u00F3n Integral LED': [
+      'images/instalacion-luminarias-led-parqueo-torre-universal.jpeg',
+      'images/proyectos/cambio-luminarias-torre-universal-santiago-1.webp',
+      'images/proyectos/cambio-luminarias-torre-universal-santiago-2.webp'
+    ],
+    'Seguridad y Control de Acceso': [
+      'images/reparacion-shutters-nuvi.webp',
+      'images/servicios/servicio-facility-management-nuvi-santiago-rd.jpg'
+    ],
+    'Auditor\u00EDa y Eficiencia Energ\u00E9tica': [
+      'images/diseno-salidas-electricas-ups-redes-nuvi.webp',
+      'images/instalacion-luminarias-led-parqueo-torre-universal.jpeg'
+    ]
+  };
+
   var catalogCategoryCopy = {
     electro: {
       lead: 'Soluciones para sistemas que no pueden darse el lujo de detenerse.',
@@ -126,10 +167,13 @@
   }
 
   function getCatalogGallery(service) {
-    var images = catalogGalleryByCat[service.cat] || ['images/hero-bg.webp'];
-    return images.map(function(src, index) {
+    var media = catalogGalleryByTitle[service.title] || catalogGalleryByCat[service.cat] || ['images/hero-bg.webp'];
+    return media.map(function(item, index) {
+      var isObject = typeof item === 'object';
       return {
-        src: src,
+        src: isObject ? item.src : item,
+        type: isObject ? item.type : 'image',
+        poster: isObject ? item.poster : '',
         alt: service.title + ' en Republica Dominicana - referencia visual ' + (index + 1)
       };
     });
@@ -259,8 +303,18 @@
   function setCatalogSlide(nextIndex) {
     if (!activeCatalogSlides.length) return;
     activeCatalogSlideIndex = (nextIndex + activeCatalogSlides.length) % activeCatalogSlides.length;
+    catalogModal.classList.toggle('catalog-video-active', activeCatalogSlides[activeCatalogSlideIndex].type === 'video');
     catalogModalStage.querySelectorAll('.catalog-modal-slide').forEach(function(slide, idx) {
       slide.classList.toggle('active', idx === activeCatalogSlideIndex);
+      var video = slide.querySelector('video');
+      if (video) {
+        if (idx === activeCatalogSlideIndex) {
+          var playRequest = video.play();
+          if (playRequest && typeof playRequest.catch === 'function') playRequest.catch(function() {});
+        } else {
+          video.pause();
+        }
+      }
     });
     catalogModalThumbs.querySelectorAll('.catalog-modal-thumb').forEach(function(thumb, idx) {
       thumb.classList.toggle('active', idx === activeCatalogSlideIndex);
@@ -276,10 +330,27 @@
       slide.className = 'catalog-modal-slide';
       if (idx === 0) slide.classList.add('active');
 
-      var image = document.createElement('img');
-      image.src = photo.src;
-      image.alt = photo.alt;
-      slide.appendChild(image);
+      var media;
+      if (photo.type === 'video') {
+        slide.classList.add('is-video');
+        media = document.createElement('video');
+        media.src = photo.src;
+        media.muted = true;
+        media.loop = true;
+        media.autoplay = idx === 0;
+        media.playsInline = true;
+        media.preload = 'metadata';
+        if (photo.poster) media.poster = photo.poster;
+        media.setAttribute('aria-label', photo.alt);
+        media.setAttribute('controls', '');
+      } else {
+        media = document.createElement('img');
+        media.src = photo.src;
+        media.alt = photo.alt;
+        media.loading = 'lazy';
+        media.decoding = 'async';
+      }
+      slide.appendChild(media);
 
       var overlay = document.createElement('div');
       overlay.className = 'catalog-modal-slide-overlay';
@@ -292,10 +363,29 @@
       thumb.className = 'catalog-modal-thumb' + (idx === 0 ? ' active' : '');
       thumb.setAttribute('data-slide-index', String(idx));
 
-      var thumbImage = document.createElement('img');
-      thumbImage.src = photo.src;
-      thumbImage.alt = photo.alt;
-      thumb.appendChild(thumbImage);
+      var thumbMedia;
+      if (photo.type === 'video') {
+        thumb.classList.add('is-video');
+        thumbMedia = document.createElement('video');
+        thumbMedia.src = photo.src;
+        thumbMedia.muted = true;
+        thumbMedia.playsInline = true;
+        thumbMedia.preload = 'metadata';
+        if (photo.poster) thumbMedia.poster = photo.poster;
+        thumbMedia.setAttribute('aria-hidden', 'true');
+        thumb.appendChild(thumbMedia);
+        var playMark = document.createElement('span');
+        playMark.className = 'catalog-modal-thumb-play';
+        playMark.setAttribute('aria-hidden', 'true');
+        playMark.textContent = '\u25B6';
+        thumb.appendChild(playMark);
+      } else {
+        thumbMedia = document.createElement('img');
+        thumbMedia.src = photo.src;
+        thumbMedia.alt = photo.alt;
+        thumbMedia.loading = 'lazy';
+        thumb.appendChild(thumbMedia);
+      }
 
       catalogModalThumbs.appendChild(thumb);
     });
@@ -305,6 +395,7 @@
     catalogModalNext.style.display = hasMultiple ? 'inline-flex' : 'none';
     catalogModalThumbs.style.display = hasMultiple ? 'grid' : 'none';
     activeCatalogSlideIndex = 0;
+    catalogModal.classList.toggle('catalog-video-active', activeCatalogSlides[0] && activeCatalogSlides[0].type === 'video');
   }
 
   function populateCatalogModal(service) {
@@ -355,8 +446,10 @@
   function closeCatalogModal() {
     if (!catalogModal || !catalogModal.classList.contains('open')) return;
     catalogModal.classList.remove('open');
+    catalogModal.classList.remove('catalog-video-active');
     catalogModal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('catalog-open');
+    catalogModalStage.querySelectorAll('video').forEach(function(video) { video.pause(); });
   }
 
   grid.addEventListener('click', function(e) {
