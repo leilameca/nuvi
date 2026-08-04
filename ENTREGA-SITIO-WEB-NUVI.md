@@ -69,7 +69,7 @@ La revision final cubrio los siguientes puntos:
 ## Canales configurados
 
 - WhatsApp comercial: +1 829 910 6423.
-- Correo de notificación del formulario: angel.nunez@nuvird.com.
+- Correo de notificación del formulario: angelnunes@nuvingenieria.com.
 - Captura de solicitudes: Google Apps Script / Google Sheets.
 
 ## Recomendaciones posteriores a la entrega

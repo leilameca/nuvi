@@ -1020,6 +1020,7 @@
 
   /* ---- Contact form -> Google Sheets ---- */
   var DEFAULT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz1dy9E_BjxgaQoQ6tiaLa0qMSMO1cxUge-gtvqDbHR3suNTEr_02_8axdJHs8X3lY/exec';
+  var LEGACY_NOTIFY_EMAIL = 'angelnunes@nuvingenieria.com';
   var LEAD_IFRAME_NAME = 'leadSubmitFrame';
   var LEAD_MESSAGE_SOURCE = 'nuvi-leads-endpoint';
   var LEAD_MESSAGE_TIMEOUT_MS = 15000;
@@ -1050,6 +1051,9 @@
     upsertHiddenField_(form, 'source', 'Web NUVI');
     upsertHiddenField_(form, 'page', window.location.href);
     upsertHiddenField_(form, 'submittedAt', new Date().toISOString());
+    // Compatibilidad con la version de Apps Script que ya esta publicada.
+    // El codigo nuevo del servidor ignora este campo y fija su destinatario.
+    upsertHiddenField_(form, 'notifyEmail', LEGACY_NOTIFY_EMAIL);
     upsertHiddenField_(form, 'parentOrigin', window.location.origin || '');
     upsertHiddenField_(form, 'responseMode', 'iframe');
   }

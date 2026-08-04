@@ -46,11 +46,9 @@ Dentro de Apps Script:
 
 - `SPREADSHEET_ID` = el ID del Google Sheet nuevo
 - `SHEET_NAME` = `Leads`
-- `NOTIFY_EMAIL` = `angel.nunez@nuvird.com`
 
-`SHEET_NAME` y `NOTIFY_EMAIL` tienen valores predeterminados, pero conviene
-definirlos de forma explicita para que la configuracion quede documentada en
-el proyecto publicado.
+`SHEET_NAME` es opcional, pero conviene definirlo de forma explicita para que
+la configuracion quede documentada en el proyecto publicado.
 
 ## 4) Autorizar el proyecto
 
@@ -97,16 +95,15 @@ data-sheets-url="https://script.google.com/macros/s/.../exec"
 
 Y reemplazalo por la URL nueva de tu deployment.
 
-El correo que recibe las notificaciones se fija del lado del servidor. En
-`Project Settings > Script Properties`, agrega:
+El correo que recibe las notificaciones se fija del lado del servidor en
+`Code.gs`:
 
-```text
-NOTIFY_EMAIL = angel.nunez@nuvird.com
+```javascript
+const DEFAULT_NOTIFY_EMAIL = 'angelnunes@nuvingenieria.com';
 ```
 
-Si esta propiedad no existe, el script usa
-`angel.nunez@nuvird.com` como valor predeterminado. El destinatario no se
-acepta desde el formulario para impedir que un visitante pueda modificarlo.
+El destinatario no se acepta desde el formulario para impedir que un visitante
+pueda modificarlo en la version nueva del servidor.
 
 ## 7) Que datos se guardan
 
@@ -129,7 +126,7 @@ Si la hoja `Leads` no existe, el script la crea y agrega esos encabezados automa
 2. Envia una prueba desde el formulario.
 3. Abre el Google Sheet nuevo.
 4. Confirma que aparecio una fila nueva.
-5. Revisa tambien `angel.nunez@nuvird.com` y confirma que llego la notificacion.
+5. Revisa tambien `angelnunes@nuvingenieria.com` y confirma que llego la notificacion.
 
 ## 9) Errores comunes
 

@@ -1,5 +1,5 @@
 const DEFAULT_SHEET_NAME = 'Leads';
-const DEFAULT_NOTIFY_EMAIL = 'angel.nunez@nuvird.com';
+const DEFAULT_NOTIFY_EMAIL = 'angelnunes@nuvingenieria.com';
 const DEFAULT_SOURCE = 'Web NUVI';
 
 function authorizeProject() {
@@ -165,10 +165,7 @@ function sendLeadEmail_(payload) {
 }
 
 function getNotifyEmail_() {
-  return (
-    PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL') ||
-    DEFAULT_NOTIFY_EMAIL
-  ).trim();
+  return DEFAULT_NOTIFY_EMAIL;
 }
 
 function asJson_(obj) {
