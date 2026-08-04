@@ -8,6 +8,7 @@ function authorizeProject() {
     throw new Error('Configura SPREADSHEET_ID en Script Properties antes de autorizar.');
   }
   SpreadsheetApp.openById(ssId).getName();
+  getNotifyEmail_();
   MailApp.getRemainingDailyQuota();
   return 'Autorizacion completada';
 }
@@ -72,7 +73,6 @@ function normalizePayload_(e) {
     mensaje: (p.mensaje || '').trim(),
     source: (p.source || DEFAULT_SOURCE).trim(),
     page: (p.page || '').trim(),
-    notifyEmail: (p.notifyEmail || DEFAULT_NOTIFY_EMAIL).trim(),
     parentOrigin: (p.parentOrigin || '').trim(),
     responseMode: (p.responseMode || '').trim()
   };
@@ -121,7 +121,9 @@ function getLeadsSheet_() {
 }
 
 function sendLeadEmail_(payload) {
-  const to = payload.notifyEmail || DEFAULT_NOTIFY_EMAIL;
+  // El destinatario se resuelve exclusivamente en el servidor. Nunca se toma
+  // del formulario, porque un visitante podria modificar los campos enviados.
+  const to = getNotifyEmail_();
   if (!to) return;
 
   const subject = 'Nuevo lead web NUVI: ' + payload.nombre;
@@ -154,10 +156,19 @@ function sendLeadEmail_(payload) {
 
   MailApp.sendEmail({
     to: to,
+    replyTo: payload.email,
+    name: 'Formulario web NUVI',
     subject: subject,
     body: plainBody,
     htmlBody: htmlBody
   });
+}
+
+function getNotifyEmail_() {
+  return (
+    PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL') ||
+    DEFAULT_NOTIFY_EMAIL
+  ).trim();
 }
 
 function asJson_(obj) {

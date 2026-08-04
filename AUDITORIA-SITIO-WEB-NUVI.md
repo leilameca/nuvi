@@ -99,7 +99,9 @@ la disponibilidad de recursos externos como Google Fonts.
 - No se detectaron errores de consola.
 - Los enlaces externos utilizan las protecciones correspondientes.
 - No se exponen credenciales privadas en la interfaz.
-- El formulario conserva su integración existente con Google Apps Script.
+- El formulario conserva su integracion con Google Apps Script y fija el
+  destinatario `angel.nunez@nuvird.com` del lado del servidor, evitando que
+  pueda ser sustituido desde el navegador.
 
 No se envió una solicitud real durante la auditoría para evitar generar un
 registro comercial ficticio. Se recomienda realizar una prueba controlada con

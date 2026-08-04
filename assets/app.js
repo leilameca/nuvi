@@ -751,8 +751,7 @@
   });
 
   /* ---- Contact form -> Google Sheets ---- */
-  var DEFAULT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyoIIqfIT4SFK-eZxCaVJ2Y2JL8-1jlB4Ndfc1uHmQa3Q1OU3v8Yz-qxq-RTW1IAkUd/exec';
-  var DEFAULT_NOTIFY_EMAIL = 'angel.nunez@nuvird.com';
+  var DEFAULT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz1dy9E_BjxgaQoQ6tiaLa0qMSMO1cxUge-gtvqDbHR3suNTEr_02_8axdJHs8X3lY/exec';
   var LEAD_IFRAME_NAME = 'leadSubmitFrame';
   var LEAD_MESSAGE_SOURCE = 'nuvi-leads-endpoint';
   var LEAD_MESSAGE_TIMEOUT_MS = 15000;
@@ -779,11 +778,10 @@
     return field;
   }
 
-  function syncLeadMetaFields_(form, notifyEmail) {
+  function syncLeadMetaFields_(form) {
     upsertHiddenField_(form, 'source', 'Web NUVI');
     upsertHiddenField_(form, 'page', window.location.href);
     upsertHiddenField_(form, 'submittedAt', new Date().toISOString());
-    upsertHiddenField_(form, 'notifyEmail', notifyEmail || DEFAULT_NOTIFY_EMAIL);
     upsertHiddenField_(form, 'parentOrigin', window.location.origin || '');
     upsertHiddenField_(form, 'responseMode', 'iframe');
   }
@@ -791,7 +789,6 @@
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     var sheetsUrl = (contactForm.getAttribute('data-sheets-url') || DEFAULT_SHEETS_URL).trim();
-    var notifyEmail = (contactForm.getAttribute('data-notify-email') || DEFAULT_NOTIFY_EMAIL).trim();
     var submitFrame = document.getElementById(LEAD_IFRAME_NAME);
     var btn = document.getElementById('formBtn');
     var btnText = document.getElementById('formBtnText');
@@ -819,7 +816,7 @@
     contactForm.setAttribute('action', sheetsUrl);
     contactForm.setAttribute('target', LEAD_IFRAME_NAME);
     submitFrame.setAttribute('name', LEAD_IFRAME_NAME);
-    syncLeadMetaFields_(contactForm, notifyEmail);
+    syncLeadMetaFields_(contactForm);
 
     function finishLeadRequest_(options) {
       options = options || {};
@@ -837,7 +834,7 @@
 
       if (options.resetForm) {
         contactForm.reset();
-        syncLeadMetaFields_(contactForm, notifyEmail);
+        syncLeadMetaFields_(contactForm);
       }
 
       if (options.successMessage && success) {
@@ -941,13 +938,12 @@
         return;
       }
 
-      syncLeadMetaFields_(contactForm, notifyEmail);
+      syncLeadMetaFields_(contactForm);
       isSubmittingLead = true;
       setLeadFormStatus_(btn, btnText, 'Enviando...', true);
 
       console.info('[NUVI Form] Enviando lead a Apps Script', {
-        endpoint: sheetsUrl,
-        notifyEmail: notifyEmail || DEFAULT_NOTIFY_EMAIL
+        endpoint: sheetsUrl
       });
 
       if (submitTimeoutId) {
