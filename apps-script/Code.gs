@@ -1,5 +1,5 @@
 const DEFAULT_SHEET_NAME = 'Leads';
-const DEFAULT_NOTIFY_EMAIL = 'angelnunes@nuvingenieria.com';
+const DEFAULT_NOTIFY_EMAIL = 'angelnunez@nuvingenieria.com';
 const DEFAULT_SOURCE = 'Web NUVI';
 
 function authorizeProject() {

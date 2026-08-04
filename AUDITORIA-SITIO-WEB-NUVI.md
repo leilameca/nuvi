@@ -100,7 +100,7 @@ la disponibilidad de recursos externos como Google Fonts.
 - Los enlaces externos utilizan las protecciones correspondientes.
 - No se exponen credenciales privadas en la interfaz.
 - El formulario conserva su integracion con Google Apps Script y fija el
-  destinatario `angelnunes@nuvingenieria.com` del lado del servidor, evitando que
+  destinatario `angelnunez@nuvingenieria.com` del lado del servidor, evitando que
   pueda ser sustituido desde el navegador.
 
 No se envió una solicitud real durante la auditoría para evitar generar un

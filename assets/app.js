@@ -1020,7 +1020,7 @@
 
   /* ---- Contact form -> Google Sheets ---- */
   var DEFAULT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz1dy9E_BjxgaQoQ6tiaLa0qMSMO1cxUge-gtvqDbHR3suNTEr_02_8axdJHs8X3lY/exec';
-  var LEGACY_NOTIFY_EMAIL = 'angelnunes@nuvingenieria.com';
+  var LEGACY_NOTIFY_EMAIL = 'angelnunez@nuvingenieria.com';
   var LEAD_IFRAME_NAME = 'leadSubmitFrame';
   var LEAD_MESSAGE_SOURCE = 'nuvi-leads-endpoint';
   var LEAD_MESSAGE_TIMEOUT_MS = 15000;

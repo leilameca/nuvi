@@ -99,7 +99,7 @@ El correo que recibe las notificaciones se fija del lado del servidor en
 `Code.gs`:
 
 ```javascript
-const DEFAULT_NOTIFY_EMAIL = 'angelnunes@nuvingenieria.com';
+const DEFAULT_NOTIFY_EMAIL = 'angelnunez@nuvingenieria.com';
 ```
 
 El destinatario no se acepta desde el formulario para impedir que un visitante
@@ -126,7 +126,7 @@ Si la hoja `Leads` no existe, el script la crea y agrega esos encabezados automa
 2. Envia una prueba desde el formulario.
 3. Abre el Google Sheet nuevo.
 4. Confirma que aparecio una fila nueva.
-5. Revisa tambien `angelnunes@nuvingenieria.com` y confirma que llego la notificacion.
+5. Revisa tambien `angelnunez@nuvingenieria.com` y confirma que llego la notificacion.
 
 ## 9) Errores comunes
 
