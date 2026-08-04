@@ -17,6 +17,7 @@ frecuentes y medios de contacto de NUVI Ingeniería. Incluye:
 - Diseño adaptable para computadoras, tabletas y celulares.
 - Navegación principal y menú móvil.
 - Catálogo de 13 servicios con filtros por categoría.
+- Carrusel táctil de servicios en celulares, con contador y controles de navegación.
 - Portada fotografica visible en cada tarjeta de servicio.
 - Galería individual de dos o tres recursos para cada servicio.
 - Reproducción de videos dentro de las galerías de impermeabilización y pintura.

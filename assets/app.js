@@ -261,6 +261,51 @@
 
   /* ---- Filter logic ---- */
   var catalogCount = document.getElementById('catalogCount');
+  var catalogMobilePrev = document.getElementById('catalogMobilePrev');
+  var catalogMobileNext = document.getElementById('catalogMobileNext');
+  var catalogMobileCounter = document.getElementById('catalogMobileCounter');
+  var catalogScrollFrame = null;
+
+  function getVisibleCatalogCards() {
+    return Array.prototype.slice.call(grid.querySelectorAll('.cat-card:not(.hidden)'));
+  }
+
+  function getActiveCatalogCardIndex(cards) {
+    if (!cards.length) return 0;
+    var gridLeft = grid.getBoundingClientRect().left;
+    var closestIndex = 0;
+    var closestDistance = Infinity;
+    cards.forEach(function(card, index) {
+      var distance = Math.abs(card.getBoundingClientRect().left - gridLeft);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+    return closestIndex;
+  }
+
+  function updateMobileCatalogNav() {
+    if (!catalogMobileCounter) return;
+    var cards = getVisibleCatalogCards();
+    var activeIndex = getActiveCatalogCardIndex(cards);
+    catalogMobileCounter.textContent = cards.length ? (activeIndex + 1) + ' de ' + cards.length : '0 de 0';
+    catalogMobilePrev.disabled = activeIndex === 0;
+    catalogMobileNext.disabled = !cards.length || activeIndex === cards.length - 1;
+  }
+
+  function scrollToCatalogCard(nextIndex) {
+    var cards = getVisibleCatalogCards();
+    if (!cards.length) return;
+    var safeIndex = Math.max(0, Math.min(nextIndex, cards.length - 1));
+    var gridRect = grid.getBoundingClientRect();
+    var cardRect = cards[safeIndex].getBoundingClientRect();
+    grid.scrollTo({
+      left: grid.scrollLeft + cardRect.left - gridRect.left,
+      behavior: 'smooth'
+    });
+  }
+
   function updateCount(f) {
     if (!catalogCount) return;
     var cards = document.querySelectorAll('.cat-card');
@@ -274,24 +319,25 @@
       catalogCount.textContent = visible + ' ' + (visible === 1 ? 'servicio' : 'servicios') +
         (f !== 'all' ? ' \u2014 ' + label : '');
       catalogCount.style.opacity = '1';
+      updateMobileCatalogNav();
     }, 100);
   }
 
-  updateCount = function(f) {
-    if (!catalogCount) return;
-    var cards = document.querySelectorAll('.cat-card');
-    var visible = 0;
-    cards.forEach(function(c) { if (!c.classList.contains('hidden')) visible++; });
-    var label = f === 'all' ? 'Mostrando todos los servicios' :
-                f === 'electro' ? 'Electromec\u00E1nico' :
-                f === 'civil'   ? 'Civil' : 'Facilidades';
-    catalogCount.style.opacity = '0';
-    setTimeout(function() {
-      catalogCount.textContent = visible + ' ' + (visible === 1 ? 'servicio' : 'servicios') +
-        (f !== 'all' ? ' \u2014 ' + label : '');
-      catalogCount.style.opacity = '1';
-    }, 100);
-  };
+  if (catalogMobilePrev && catalogMobileNext) {
+    catalogMobilePrev.addEventListener('click', function() {
+      var cards = getVisibleCatalogCards();
+      scrollToCatalogCard(getActiveCatalogCardIndex(cards) - 1);
+    });
+    catalogMobileNext.addEventListener('click', function() {
+      var cards = getVisibleCatalogCards();
+      scrollToCatalogCard(getActiveCatalogCardIndex(cards) + 1);
+    });
+    grid.addEventListener('scroll', function() {
+      if (catalogScrollFrame) cancelAnimationFrame(catalogScrollFrame);
+      catalogScrollFrame = requestAnimationFrame(updateMobileCatalogNav);
+    }, { passive: true });
+    window.addEventListener('resize', updateMobileCatalogNav);
+  }
 
   var filterBtns = document.querySelectorAll('.filter-btn');
   filterBtns.forEach(function(btn) {
@@ -308,11 +354,13 @@
           card.classList.toggle('hidden', !show);
           card.classList.remove('filtering');
         });
+        grid.scrollTo({ left: 0, behavior: 'auto' });
         updateCount(f);
       }, 120);
     });
   });
   updateCount('all');
+  updateMobileCatalogNav();
 
   /* ---- Catalog modal ---- */
   var catalogModal = document.getElementById('catalogModal');
