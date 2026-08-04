@@ -1570,7 +1570,7 @@ body.catalog-open .wa-float { opacity: 0; pointer-events: none; }
   line-height: 1.15; margin: 0.1rem 0 0.2rem;
 }
 .tech-game-brand p { color: var(--text-3); font-size: 0.8rem; }
-body.tech-game-open { overflow: hidden; }
+body.tech-game-active { overflow: hidden; }
 .tech-game-modal .tech-runner { margin-top: 0; }
 .tech-game-modal .tech-runner-stage,
 .tech-game-modal #techRunnerCanvas { height: 190px; }

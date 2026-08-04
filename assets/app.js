@@ -832,7 +832,7 @@
       previousFocus = document.activeElement;
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('tech-game-open');
+      document.body.classList.add('tech-game-active');
       window.requestAnimationFrame(function() {
         resize_();
         if (overlay.classList.contains('is-hidden')) canvas.focus({ preventScroll: true });
@@ -851,7 +851,7 @@
       }
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('tech-game-open');
+      document.body.classList.remove('tech-game-active');
       if (previousFocus && previousFocus.focus) previousFocus.focus({ preventScroll: true });
     }
 
@@ -1061,8 +1061,8 @@
     });
     window.addEventListener('resize', resize_);
     resize_();
-    if (window.location.hash === '#juego-nuvi') {
-      window.setTimeout(openGame_, 120);
+    if (window.location.hash === '#juego-nuvi' && openBtn) {
+      window.setTimeout(function() { openBtn.click(); }, 120);
     }
   })();
 
