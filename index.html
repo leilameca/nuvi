@@ -833,26 +833,16 @@
       </div>
     </div>
 
-    <div class="tech-runner reveal" id="techRunner">
-      <div class="tech-runner-head">
-        <div>
-          <span class="tech-runner-kicker">Pausa t&eacute;cnica</span>
-          <strong>Ayuda al t&eacute;cnico a llegar a la obra</strong>
-        </div>
-        <div class="tech-runner-score">
-          <span>Puntos <b id="techRunnerScore">000</b></span>
-          <span>R&eacute;cord <b id="techRunnerBest">000</b></span>
-        </div>
+    <div class="tech-game-launcher reveal">
+      <div class="tech-game-launcher-copy">
+        <span class="tech-runner-kicker">Pausa t&eacute;cnica</span>
+        <strong>NUVI Tech Runner</strong>
+        <span>Supera los retos de la obra y protege la continuidad operativa.</span>
       </div>
-      <div class="tech-runner-stage">
-        <canvas id="techRunnerCanvas" height="170" tabindex="0" role="application" aria-label="Juego del t&eacute;cnico de NUVI. Presiona espacio, flecha arriba o toca la pantalla para saltar obst&aacute;culos."></canvas>
-        <div class="tech-runner-overlay" id="techRunnerOverlay" role="status" aria-live="polite">
-          <span class="tech-runner-overlay-title" id="techRunnerMessage">&iquest;Listo para la obra?</span>
-          <button type="button" class="tech-runner-start" id="techRunnerStart">Comenzar</button>
-          <small>Espacio, flecha arriba o toque para saltar</small>
-        </div>
-      </div>
-      <button type="button" class="tech-runner-jump" id="techRunnerJump" aria-label="Saltar en el juego">Saltar</button>
+      <button type="button" class="tech-game-open" id="techGameOpen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        Play Game
+      </button>
     </div>
   </div>
 </section>
@@ -880,6 +870,42 @@
   </div>
 </section>
 </main>
+
+<div class="tech-game-modal" id="techGameModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="techGameTitle">
+  <div class="tech-game-backdrop" data-tech-game-close></div>
+  <div class="tech-game-dialog">
+    <button type="button" class="tech-game-close" id="techGameClose" aria-label="Cerrar juego">&times;</button>
+    <div class="tech-game-brand">
+      <img src="images/logo.webp" alt="" aria-hidden="true">
+      <div>
+        <span>Misi&oacute;n NUVI</span>
+        <h2 id="techGameTitle">Tech Runner</h2>
+        <p>Lleva al t&eacute;cnico hasta la obra sin perder la continuidad operativa.</p>
+      </div>
+    </div>
+    <div class="tech-runner" id="techRunner">
+      <div class="tech-runner-head">
+        <div>
+          <span class="tech-runner-kicker">Turno en progreso</span>
+          <strong>Esquiva conos y cajas de herramientas</strong>
+        </div>
+        <div class="tech-runner-score">
+          <span>Puntos <b id="techRunnerScore">000</b></span>
+          <span>R&eacute;cord <b id="techRunnerBest">000</b></span>
+        </div>
+      </div>
+      <div class="tech-runner-stage">
+        <canvas id="techRunnerCanvas" height="190" tabindex="0" role="application" aria-label="Juego del t&eacute;cnico de NUVI. Presiona espacio, flecha arriba o toca la pantalla para saltar obst&aacute;culos."></canvas>
+        <div class="tech-runner-overlay" id="techRunnerOverlay" role="status" aria-live="polite">
+          <span class="tech-runner-overlay-title" id="techRunnerMessage">&iquest;Listo para la obra?</span>
+          <button type="button" class="tech-runner-start" id="techRunnerStart">Comenzar misi&oacute;n</button>
+          <small>Espacio, flecha arriba o toque para saltar</small>
+        </div>
+      </div>
+      <button type="button" class="tech-runner-jump" id="techRunnerJump" aria-label="Saltar en el juego">Saltar</button>
+    </div>
+  </div>
+</div>
 
 <footer id="contacto">
   <div class="container">

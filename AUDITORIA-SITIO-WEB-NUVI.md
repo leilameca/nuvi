@@ -99,6 +99,8 @@ la disponibilidad de recursos externos como Google Fonts.
 - No se detectaron errores de consola.
 - Los enlaces externos utilizan las protecciones correspondientes.
 - No se exponen credenciales privadas en la interfaz.
+- El minijuego se inicia solo por accion del visitante, se pausa al cerrar su
+  ventana y ofrece controles tactiles y de teclado.
 - El formulario conserva su integracion con Google Apps Script y fija el
   destinatario `angelnunez@nuvingenieria.com` del lado del servidor, evitando que
   pueda ser sustituido desde el navegador.

@@ -24,6 +24,8 @@ frecuentes y medios de contacto de NUVI Ingeniería. Incluye:
 - Sección de proyectos realizados.
 - Botones de contacto por WhatsApp.
 - Formulario conectado al flujo de Google Sheets y notificación configurado.
+- Minijuego `NUVI Tech Runner` dentro de una ventana modal, con controles para
+  teclado y celular, puntuacion y record guardado en el dispositivo.
 - Metadatos SEO, datos estructurados, `robots.txt`, sitemap de imagenes y dominio personalizado.
 
 ## Material fotografico y audiovisual

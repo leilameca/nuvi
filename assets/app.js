@@ -762,13 +762,17 @@
     var message = document.getElementById('techRunnerMessage');
     var scoreNode = document.getElementById('techRunnerScore');
     var bestNode = document.getElementById('techRunnerBest');
+    var modal = document.getElementById('techGameModal');
+    var openBtn = document.getElementById('techGameOpen');
+    var closeBtn = document.getElementById('techGameClose');
+    var previousFocus = null;
     var width = 0;
     var height = 170;
     var groundY = 143;
     var running = false;
     var score = 0;
     var best = 0;
-    var speed = 255;
+    var speed = 190;
     var spawnIn = 850;
     var lastTime = 0;
     var frameId = null;
@@ -798,8 +802,8 @@
 
     function reset_() {
       score = 0;
-      speed = 255;
-      spawnIn = 900;
+      speed = 190;
+      spawnIn = 1100;
       obstacles = [{
         x: Math.max(300, Math.min(680, width * 0.7)),
         y: groundY - 30,
@@ -823,6 +827,34 @@
       frameId = window.requestAnimationFrame(loop_);
     }
 
+    function openGame_() {
+      if (!modal) return;
+      previousFocus = document.activeElement;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('tech-game-open');
+      window.requestAnimationFrame(function() {
+        resize_();
+        if (overlay.classList.contains('is-hidden')) canvas.focus({ preventScroll: true });
+        else startBtn.focus({ preventScroll: true });
+      });
+    }
+
+    function closeGame_() {
+      if (!modal || !modal.classList.contains('is-open')) return;
+      if (running) {
+        running = false;
+        if (frameId) window.cancelAnimationFrame(frameId);
+        message.textContent = 'Misi\u00F3n en pausa';
+        startBtn.textContent = 'Reiniciar misi\u00F3n';
+        overlay.classList.remove('is-hidden');
+      }
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('tech-game-open');
+      if (previousFocus && previousFocus.focus) previousFocus.focus({ preventScroll: true });
+    }
+
     function jump_() {
       if (!running) {
         start_();
@@ -842,7 +874,7 @@
         h: isCone ? 30 : 25,
         type: isCone ? 'cone' : 'toolbox'
       });
-      spawnIn = 900 + Math.random() * 750 - Math.min(score * 2, 220);
+      spawnIn = 1100 + Math.random() * 850 - Math.min(score * 1.2, 160);
     }
 
     function hit_(obstacle) {
@@ -877,7 +909,7 @@
         player.grounded = true;
       }
 
-      speed = Math.min(430, 255 + score * 0.72);
+      speed = Math.min(315, 190 + score * 0.45);
       spawnIn -= dt * 1000;
       if (spawnIn <= 0) addObstacle_();
 
@@ -1001,6 +1033,13 @@
 
     startBtn.addEventListener('click', start_);
     jumpBtn.addEventListener('click', jump_);
+    if (openBtn) openBtn.addEventListener('click', openGame_);
+    if (closeBtn) closeBtn.addEventListener('click', closeGame_);
+    if (modal) {
+      modal.querySelectorAll('[data-tech-game-close]').forEach(function(el) {
+        el.addEventListener('click', closeGame_);
+      });
+    }
     canvas.addEventListener('pointerdown', function(e) {
       e.preventDefault();
       jump_();
@@ -1014,8 +1053,17 @@
     document.addEventListener('visibilitychange', function() {
       if (!document.hidden && running) lastTime = window.performance.now();
     });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
+        e.preventDefault();
+        closeGame_();
+      }
+    });
     window.addEventListener('resize', resize_);
     resize_();
+    if (window.location.hash === '#juego-nuvi') {
+      window.setTimeout(openGame_, 120);
+    }
   })();
 
   /* ---- Contact form -> Google Sheets ---- */
