@@ -750,6 +750,274 @@
     });
   });
 
+  /* ---- NUVI technician runner ---- */
+  (function initTechRunner_() {
+    var canvas = document.getElementById('techRunnerCanvas');
+    if (!canvas || !canvas.getContext) return;
+
+    var ctx = canvas.getContext('2d');
+    var startBtn = document.getElementById('techRunnerStart');
+    var jumpBtn = document.getElementById('techRunnerJump');
+    var overlay = document.getElementById('techRunnerOverlay');
+    var message = document.getElementById('techRunnerMessage');
+    var scoreNode = document.getElementById('techRunnerScore');
+    var bestNode = document.getElementById('techRunnerBest');
+    var width = 0;
+    var height = 170;
+    var groundY = 143;
+    var running = false;
+    var score = 0;
+    var best = 0;
+    var speed = 255;
+    var spawnIn = 850;
+    var lastTime = 0;
+    var frameId = null;
+    var obstacles = [];
+    var player = { x: 55, y: 99, w: 28, h: 44, vy: 0, grounded: true };
+
+    try { best = Number(window.localStorage.getItem('nuviTechRunnerBest')) || 0; } catch (err) {}
+    bestNode.textContent = padScore_(best);
+
+    function padScore_(value) {
+      return String(Math.floor(value)).padStart(3, '0');
+    }
+
+    function resize_() {
+      var rect = canvas.getBoundingClientRect();
+      var ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = Math.max(280, rect.width);
+      height = rect.height || 170;
+      groundY = height - 27;
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      player.x = Math.max(40, Math.min(70, width * 0.08));
+      if (player.grounded) player.y = groundY - player.h;
+      draw_();
+    }
+
+    function reset_() {
+      score = 0;
+      speed = 255;
+      spawnIn = 900;
+      obstacles = [{
+        x: Math.max(300, Math.min(680, width * 0.7)),
+        y: groundY - 30,
+        w: 22,
+        h: 30,
+        type: 'cone'
+      }];
+      player.y = groundY - player.h;
+      player.vy = 0;
+      player.grounded = true;
+      scoreNode.textContent = '000';
+    }
+
+    function start_() {
+      reset_();
+      running = true;
+      overlay.classList.add('is-hidden');
+      canvas.focus({ preventScroll: true });
+      lastTime = window.performance.now();
+      if (frameId) window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(loop_);
+    }
+
+    function jump_() {
+      if (!running) {
+        start_();
+        return;
+      }
+      if (!player.grounded) return;
+      player.vy = -490;
+      player.grounded = false;
+    }
+
+    function addObstacle_() {
+      var isCone = Math.random() > 0.35;
+      obstacles.push({
+        x: width + 20,
+        y: groundY - (isCone ? 30 : 25),
+        w: isCone ? 22 : 32,
+        h: isCone ? 30 : 25,
+        type: isCone ? 'cone' : 'toolbox'
+      });
+      spawnIn = 900 + Math.random() * 750 - Math.min(score * 2, 220);
+    }
+
+    function hit_(obstacle) {
+      var px = player.x + 5;
+      var py = player.y + 4;
+      var pw = player.w - 9;
+      var ph = player.h - 5;
+      return px < obstacle.x + obstacle.w - 3 &&
+        px + pw > obstacle.x + 3 &&
+        py < obstacle.y + obstacle.h &&
+        py + ph > obstacle.y + 4;
+    }
+
+    function end_() {
+      running = false;
+      if (score > best) {
+        best = Math.floor(score);
+        bestNode.textContent = padScore_(best);
+        try { window.localStorage.setItem('nuviTechRunnerBest', String(best)); } catch (err) {}
+      }
+      message.textContent = 'Fin del turno · ' + padScore_(score) + ' puntos';
+      startBtn.textContent = 'Intentar otra vez';
+      overlay.classList.remove('is-hidden');
+    }
+
+    function update_(dt) {
+      player.vy += 1320 * dt;
+      player.y += player.vy * dt;
+      if (player.y >= groundY - player.h) {
+        player.y = groundY - player.h;
+        player.vy = 0;
+        player.grounded = true;
+      }
+
+      speed = Math.min(430, 255 + score * 0.72);
+      spawnIn -= dt * 1000;
+      if (spawnIn <= 0) addObstacle_();
+
+      for (var i = obstacles.length - 1; i >= 0; i--) {
+        obstacles[i].x -= speed * dt;
+        if (hit_(obstacles[i])) {
+          end_();
+          return;
+        }
+        if (obstacles[i].x + obstacles[i].w < 0) obstacles.splice(i, 1);
+      }
+
+      score += dt * 10;
+      scoreNode.textContent = padScore_(score);
+    }
+
+    function drawTech_() {
+      var x = Math.round(player.x);
+      var y = Math.round(player.y);
+      var stride = player.grounded && running ? Math.sin(score * 2.6) * 3 : 0;
+      ctx.save();
+      ctx.translate(x, y);
+
+      // Legs and safety boots
+      ctx.strokeStyle = '#342c29';
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'square';
+      ctx.beginPath();
+      ctx.moveTo(11, 31); ctx.lineTo(9 + stride, 41);
+      ctx.moveTo(18, 31); ctx.lineTo(20 - stride, 41);
+      ctx.stroke();
+      ctx.fillStyle = '#171312';
+      ctx.fillRect(4 + stride, 40, 8, 4);
+      ctx.fillRect(17 - stride, 40, 8, 4);
+
+      // Reflective vest and arms
+      ctx.strokeStyle = '#6B4636';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(7, 20); ctx.lineTo(2, 29);
+      ctx.moveTo(21, 20); ctx.lineTo(25, 28);
+      ctx.stroke();
+      ctx.fillStyle = '#6B1A10';
+      ctx.fillRect(7, 17, 15, 17);
+      ctx.fillStyle = '#f0b429';
+      ctx.fillRect(7, 22, 15, 3);
+      ctx.fillRect(13, 17, 3, 17);
+
+      // Head and hard hat
+      ctx.fillStyle = '#b97851';
+      ctx.fillRect(9, 7, 12, 11);
+      ctx.fillStyle = '#27201d';
+      ctx.fillRect(18, 11, 2, 2);
+      ctx.fillStyle = '#f0b429';
+      ctx.fillRect(7, 3, 16, 6);
+      ctx.fillRect(5, 8, 20, 3);
+      ctx.fillStyle = '#fff4c7';
+      ctx.fillRect(12, 3, 3, 5);
+      ctx.restore();
+    }
+
+    function drawObstacle_(o) {
+      if (o.type === 'cone') {
+        ctx.fillStyle = '#c95a22';
+        ctx.beginPath();
+        ctx.moveTo(o.x + o.w / 2, o.y);
+        ctx.lineTo(o.x + o.w - 4, o.y + o.h - 5);
+        ctx.lineTo(o.x + 4, o.y + o.h - 5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = '#fff5dd';
+        ctx.fillRect(o.x + 7, o.y + 15, o.w - 14, 4);
+        ctx.fillStyle = '#8c3818';
+        ctx.fillRect(o.x, o.y + o.h - 5, o.w, 5);
+      } else {
+        ctx.fillStyle = '#4A0F08';
+        ctx.fillRect(o.x, o.y + 6, o.w, o.h - 6);
+        ctx.strokeStyle = '#6B4636';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(o.x + 9, o.y, o.w - 18, 9);
+        ctx.fillStyle = '#f0b429';
+        ctx.fillRect(o.x + 13, o.y + 11, 6, 4);
+      }
+    }
+
+    function draw_() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Subtle industrial skyline
+      ctx.fillStyle = 'rgba(74,15,8,0.035)';
+      for (var x = 15; x < width; x += 95) {
+        ctx.fillRect(x, groundY - 52, 48, 52);
+        ctx.fillRect(x + 9, groundY - 65, 7, 13);
+      }
+      ctx.strokeStyle = '#cfc8c2';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, groundY + 1);
+      ctx.lineTo(width, groundY + 1);
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(74,15,8,0.11)';
+      ctx.setLineDash([12, 12]);
+      ctx.beginPath();
+      ctx.moveTo(0, groundY + 14);
+      ctx.lineTo(width, groundY + 14);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      drawTech_();
+      obstacles.forEach(drawObstacle_);
+    }
+
+    function loop_(now) {
+      if (!running) return;
+      var dt = Math.min((now - lastTime) / 1000, 0.032);
+      lastTime = now;
+      update_(dt);
+      draw_();
+      if (running) frameId = window.requestAnimationFrame(loop_);
+    }
+
+    startBtn.addEventListener('click', start_);
+    jumpBtn.addEventListener('click', jump_);
+    canvas.addEventListener('pointerdown', function(e) {
+      e.preventDefault();
+      jump_();
+    });
+    canvas.addEventListener('keydown', function(e) {
+      if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'Enter') {
+        e.preventDefault();
+        jump_();
+      }
+    });
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden && running) lastTime = window.performance.now();
+    });
+    window.addEventListener('resize', resize_);
+    resize_();
+  })();
+
   /* ---- Contact form -> Google Sheets ---- */
   var DEFAULT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz1dy9E_BjxgaQoQ6tiaLa0qMSMO1cxUge-gtvqDbHR3suNTEr_02_8axdJHs8X3lY/exec';
   var LEAD_IFRAME_NAME = 'leadSubmitFrame';

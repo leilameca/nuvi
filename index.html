@@ -336,6 +336,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -830,6 +831,28 @@
           </div>
         </form>
       </div>
+    </div>
+
+    <div class="tech-runner reveal" id="techRunner">
+      <div class="tech-runner-head">
+        <div>
+          <span class="tech-runner-kicker">Pausa t&eacute;cnica</span>
+          <strong>Ayuda al t&eacute;cnico a llegar a la obra</strong>
+        </div>
+        <div class="tech-runner-score">
+          <span>Puntos <b id="techRunnerScore">000</b></span>
+          <span>R&eacute;cord <b id="techRunnerBest">000</b></span>
+        </div>
+      </div>
+      <div class="tech-runner-stage">
+        <canvas id="techRunnerCanvas" height="170" tabindex="0" role="application" aria-label="Juego del t&eacute;cnico de NUVI. Presiona espacio, flecha arriba o toca la pantalla para saltar obst&aacute;culos."></canvas>
+        <div class="tech-runner-overlay" id="techRunnerOverlay" role="status" aria-live="polite">
+          <span class="tech-runner-overlay-title" id="techRunnerMessage">&iquest;Listo para la obra?</span>
+          <button type="button" class="tech-runner-start" id="techRunnerStart">Comenzar</button>
+          <small>Espacio, flecha arriba o toque para saltar</small>
+        </div>
+      </div>
+      <button type="button" class="tech-runner-jump" id="techRunnerJump" aria-label="Saltar en el juego">Saltar</button>
     </div>
   </div>
 </section>
